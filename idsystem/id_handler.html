@@ -11,15 +11,13 @@
             const id = urlParams.get('id')
             const nid = urlParams.get('nid')
 
-            var baseurl = window.location.origin + "/crosshell_web";
-            
-            console.log(baseurl);
+            var baseurl = window.location.origin;
 
             //id
             if (id) {
                 //devmode
                 if (id == "devmode") {
-                    window.location.href = baseurl.concat("/docs/articles/crosshell/about_devmode.html");
+                    window.location.href = baseurl.concat("/crosshell_web/docs/articles/crosshell/about_devmode.html");
                 }
             }
 
