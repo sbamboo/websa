@@ -1,1 +1,17 @@
-<p>HH</p>
+<script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const id = urlParams.get('id')
+    const nid = urlParams.get('nid')
+
+    //id
+    if (id != "") {
+        console.log("id found")
+    }
+
+    //nid
+    if (nid != "") {
+        console.log("nid found")
+    }
+</script>
