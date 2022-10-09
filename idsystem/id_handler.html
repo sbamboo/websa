@@ -1,17 +1,30 @@
-<script>
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+<!DOCTYPE html>
+<html>
+    <head>
 
-    const id = urlParams.get('id')
-    const nid = urlParams.get('nid')
+    </head>
+    <body>
+        <script>
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
 
-    //id
-    if (id != "") {
-        console.log(id)
-    }
+            const id = urlParams.get('id')
+            const nid = urlParams.get('nid')
 
-    //nid
-    if (nid != "") {
-        console.log(nid)
-    }
-</script>
+            var baseurl = window.location.origin;
+
+            //id
+            if (id) {
+                //devmode
+                if (id == "devmode") {
+                    window.location.href = baseurl.concat("/docs/articles/crosshell/about_devmode.html");
+                }
+            }
+
+            //nid
+            if (nid) {
+                console.log(nid)
+            }
+        </script>
+    </body>
+</html>
