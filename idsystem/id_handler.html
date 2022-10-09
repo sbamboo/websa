@@ -4,20 +4,35 @@
 
     </head>
     <body>
+        <p id="giveurl"></p>
+
         <script>
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
 
             const id = urlParams.get('id')
             const nid = urlParams.get('nid')
+            const giveurl = urlParams.get('giveurl')
 
             var baseurl = window.location.origin;
+
+            // Url locations
+            urllocation_devmode = "/crosshell_web/docs/articles/crosshell/about_devmode.html"
+
+
+            //giveUrl
+            if (giveurl == "True") {
+                //devmode
+                if (id == "devmode") {
+                    document.getElementById("giveurl").innerHTML = urllocation_devmode;
+                }
+            }
 
             //id
             if (id) {
                 //devmode
                 if (id == "devmode") {
-                    window.location.href = baseurl.concat("/crosshell_web/docs/articles/crosshell/about_devmode.html");
+                    window.location.href = baseurl.concat(urllocation_devmode);
                 }
             }
 
