@@ -17,13 +17,16 @@
 
             var baseurl = window.location.origin;
 
+            // Lists
+            id_shorteners = "devmode, commonparameters"
+
             // Url locations
             urllocation_devmode = "/websa/crosshell/docs/articles/about_devmode.html"
             urllocation_commonparameters = "/websa/crosshell/docs/articles/about_commonparameters.html"
 
             //list
             if (list == "True") {
-                document.getElementById("giveurl").innerHTML = "devmode, commonparameters";
+                document.getElementById("giveurl").innerHTML = "Avaliable Shortening ids:" + id_shorteners;
             }
 
             //giveUrl
