@@ -13,6 +13,7 @@
             const id = urlParams.get('id')
             const nid = urlParams.get('nid')
             const giveurl = urlParams.get('giveurl')
+            const list = urlParams.get('list')
 
             var baseurl = window.location.origin;
 
@@ -20,6 +21,10 @@
             urllocation_devmode = "/websa/crosshell/docs/articles/about_devmode.html"
             urllocation_commonparameters = "/websa/crosshell/docs/articles/about_commonparameters.html"
 
+            //list
+            if (list == "True") {
+                document.getElementById("giveurl").innerHTML = "devmode, commonparameters";
+            }
 
             //giveUrl
             if (giveurl == "True") {
