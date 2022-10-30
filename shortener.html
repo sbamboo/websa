@@ -17,19 +17,19 @@
             var baseurl = window.location.origin;
 
             // Url locations
-            urllocation_crosshell_devmode = "/websa/crosshell/docs/articles/about_devmode.html"
-            urllocation_crosshell_commonparameters = "/websa/crosshell/docs/articles/about_commonparameters.html"
+            urllocation_devmode = "/websa/crosshell/docs/articles/about_devmode.html"
+            urllocation_commonparameters = "/websa/crosshell/docs/articles/about_commonparameters.html"
 
 
             //giveUrl
             if (giveurl == "True") {
-                //crosshell.devmode
+                //devmode
                 if (id == "devmode") {
-                    document.getElementById("giveurl").innerHTML = urllocation_crosshell_devmode;
+                    document.getElementById("giveurl").innerHTML = urllocation_devmode;
                 }
-                //crosshell.commonparameters
+                //commonparameters
                 if (id == "commonparameters") {
-                    document.getElementById("giveurl").innerHTML = urllocation_crosshell_commonparameters;
+                    document.getElementById("giveurl").innerHTML = urllocation_commonparameters;
                 }
             }
 
@@ -37,11 +37,11 @@
             if (id) {
                 //devmode
                 if (id == "devmode") {
-                    window.location.href = baseurl.concat(urllocation_crosshell_devmode);
+                    window.location.href = baseurl.concat(urllocation_devmode);
                 }
-                //crosshell.commonparameters
+                //commonparameters
                 if (id == "commonparameters") {
-                    window.location.href = baseurl.concat(urllocation_crosshell_commonparameters);
+                    window.location.href = baseurl.concat(urllocation_commonparameters);
                 }
             }
 
