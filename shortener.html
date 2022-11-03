@@ -18,11 +18,12 @@
             var baseurl = window.location.origin;
 
             // Lists
-            id_shorteners = "devmode, commonparameters"
+            id_shorteners = "devmode, commonparameters, cs_publicapi"
 
             // Url locations
             urllocation_devmode = "/websa/crosshell/docs/articles/about_devmode.html"
             urllocation_commonparameters = "/websa/crosshell/docs/articles/about_commonparameters.html"
+            urllocation_cs_publicapi = "/websa/crosshell/docs/articles/about_publicapi.html"
 
             //list
             if (list == "True") {
@@ -39,6 +40,10 @@
                 if (id == "commonparameters") {
                     document.getElementById("giveurl").innerHTML = urllocation_commonparameters;
                 }
+                //crosshell public api
+                if (id == "cs_publicapi") {
+                    document.getElementById("giveurl").innerHTML = urllocation_cs_publicapi;
+                }
             }
 
             //id
@@ -50,6 +55,10 @@
                 //commonparameters
                 if (id == "commonparameters") {
                     window.location.href = baseurl.concat(urllocation_commonparameters);
+                }
+                //crosshell public api
+                if (id == "cs_publicapi") {
+                    window.location.href = baseurl.concat(urllocation_cs_publicapi);
                 }
             }
 
