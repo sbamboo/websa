@@ -18,13 +18,15 @@
             var baseurl = window.location.origin;
 
             // Lists
-            id_shorteners = "devmode, commonparameters, cs_publicapi, builtincommands"
+            id_shorteners = "devmode, commonparameters, cs_publicapi, builtincommands, interpriter, crosshellscripting"
 
             // Url locations
             urllocation_devmode = "/websa/crosshell/docs/articles/about_devmode.html"
             urllocation_commonparameters = "/websa/crosshell/docs/articles/about_commonparameters.html"
             urllocation_cs_publicapi = "/websa/crosshell/docs/articles/about_publicapi.html"
             urllocation_builtincommands = "/websa/crosshell/docs/articles/about_builtincommands.html"
+            urllocation_interpriter = "/websa/crosshell/docs/articles/about_interpriter.html"
+            urllocation_crosshellscripting = "/websa/crosshell/docs/articles/about_crosshellscripting.html"
 
             //list
             if (list == "True") {
@@ -49,6 +51,14 @@
                 if (id == "builtincommands") {
                     document.getElementById("giveurl").innerHTML = urllocation_builtincommands;
                 }
+                //interpriter
+                if (id == "interpriter") {
+                    document.getElementById("giveurl").innerHTML = urllocation_interpriter;
+                }
+                //crosshellscripting
+                if (id == "crosshellscripting") {
+                    document.getElementById("giveurl").innerHTML = urllocation_crosshellscripting;
+                }
             }
 
             //id
@@ -68,6 +78,14 @@
                 //builtin commands
                 if (id == "builtincommands") {
                     window.location.href = baseurl.concat(urllocation_builtincommands);
+                }
+                //interpriter
+                if (id == "interpriter") {
+                    window.location.href = baseurl.concat(urllocation_interpriter);
+                }
+                //crosshellscripting
+                if (id == "crosshellscripting") {
+                    window.location.href = baseurl.concat(urllocation_crosshellscripting);
                 }
             }
 
