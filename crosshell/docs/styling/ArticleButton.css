@@ -10,18 +10,6 @@
     align: center;
 }
 
-#ContentBox {
-    text-align: center;
-}
-
-#tempText {
-    font-family: "Varela Round";
-    font-size: 10px;
-    color:#7e7e7e;
-    position: relative;
-    top: -110px;
-}
-
 @media screen and (prefers-color-scheme: ligth) {
     #ArticleButton {
         color: #FFFFFF;
