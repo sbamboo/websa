@@ -19,6 +19,17 @@ img {
     padding-top: 15px;
 }
 
+#HomeButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    scale: 110%;
+    font-family: "Varela Round";
+}
+
 
 @media screen and (prefers-color-scheme: ligth) {
     body {
@@ -37,6 +48,10 @@ img {
     }
     b {
         color: rgb(32, 32, 32);
+    }
+    #HomeButton {
+        background: #DFDEDF;
+        color: #494949;
     }
 }
 
@@ -57,5 +72,9 @@ img {
     }
     b {
         color: white;
+    }
+    #HomeButton {
+        background: #6E6D70;
+        color: #DFDEDF;
     }
 }

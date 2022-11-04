@@ -1,0 +1,45 @@
+#ArticleButton {
+    display: inline-block;
+    padding: 7px;
+    margin: 0px 12px;
+    box-sizing: border-box;
+    font-weight: 300;
+    transition: all 0.2s;
+    font-size: 15px;
+    font-family: "Varela Round";
+    align: center;
+}
+
+#ContentBox {
+    text-align: center;
+}
+
+#tempText {
+    font-family: "Varela Round";
+    font-size: 10px;
+    color:#7e7e7e;
+    position: relative;
+    top: -110px;
+}
+
+@media screen and (prefers-color-scheme: ligth) {
+    #ArticleButton {
+        color: #FFFFFF;
+        border: 0.1em solid #FFFFFF;
+    }
+    #ArticleButton:hover {
+        color:#000000;
+        background-color:#FFFFFF;
+    }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    #ArticleButton {
+        color: #ffffff;
+        border: 0.1em solid #ffffff;
+        background-color: #1f2227;
+    }
+    #ArticleButton:hover {
+        background-color:#7e7e7e;
+    }
+}
