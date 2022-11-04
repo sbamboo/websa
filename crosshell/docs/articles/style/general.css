@@ -1,0 +1,61 @@
+#WebiHidden {
+    display: none;
+}
+body {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    font-family: "Varela Round";
+    font-size: 19px;
+}
+h1 {
+    text-align: center;
+    font-size: 45px;
+    font-family: "Helvetica";
+}
+img {
+    border-radius: 40px;
+    max-width: 50%;
+    padding-top: 15px;
+}
+
+
+@media screen and (prefers-color-scheme: ligth) {
+    body {
+        background-color: rgb(255, 255, 255);
+        color: Black;
+    }
+    h1 {
+        color: rgb(0, 0, 0);
+        border-bottom: 3px solid black;
+    }
+    p {
+        color: rgb(44, 44, 44);
+    }
+    i {
+        color: rgb(80, 80, 80);
+    }
+    b {
+        color: rgb(32, 32, 32);
+    }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        background-color: #1f2227;
+        color: white;
+    }
+    h1 {
+        border-bottom: 3px solid white;
+        color: white;
+    }
+    p {
+        color: white;
+    }
+    i {
+        color: rgb(160, 160, 160);
+    }
+    b {
+        color: white;
+    }
+}
