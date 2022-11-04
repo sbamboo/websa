@@ -27,7 +27,7 @@ img {
     }
     h2 {
         color: rgb(0, 0, 0);
-        border-bottom: 3px solid black;
+        border-bottom: 2px solid black;
     }
     p {
         color: rgb(44, 44, 44);
@@ -46,7 +46,7 @@ img {
         color: white;
     }
     h2 {
-        border-bottom: 3px solid white;
+        border-bottom: 2px solid white;
         color: white;
     }
     p {
