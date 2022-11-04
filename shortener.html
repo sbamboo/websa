@@ -14,8 +14,15 @@
             const nid = urlParams.get('nid')
             const giveurl = urlParams.get('giveurl')
             const list = urlParams.get('list')
+            const webapp = urlParams.get('webapp')
 
             var baseurl = window.location.origin;
+
+            //Webapp
+            if (webapp == "True") {
+                var baseurl_O = baseurl.concat("/websa/webAppWrapper.html?link=")
+                var baseurl = baseurl_O.concat(baseurl)
+            }
 
             // Lists
             id_shorteners = "devmode, commonparameters, cs_publicapi, builtincommands, interpriter, crosshellscripting"
