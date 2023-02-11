@@ -7,32 +7,42 @@
   <body>
     <p id="stored-data"></p>
     <script>
-      const API_URL = 'https://api.github.com/repos/simonkalmiclaesson/crosshell_zedix_verifier/contents/strings.txt';
-      
+      const API_URL = 'https://api.github.com/repos/<GITHUB_USERNAME>/<REPO_NAME>/contents/strings.txt';
+
       // Parse the URL and get the 'send' or 'retrieve' parameter
       const urlParams = new URLSearchParams(window.location.search);
       const sendParam = urlParams.get('send');
       const retrieveParam = urlParams.get('retrieve');
-      
+
       if (sendParam) {
         // Send the data to the API to store it
         const data = sendParam.slice(1, -1); // Remove the double quotes from the string
         const content = btoa(data); // Encode the data as base64
         const message = `Add string "${data}" to storage`;
-        
-        fetch(API_URL, {
+
+        const commitData = {
+          message: message,
+          committer: {
+            name: 'Monalisa Octocat',
+            email: 'octocat@github.com'
+          },
+          content: content
+        };
+
+        const apiParams = {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json'
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json',
+            'X-GitHub-Api-Version': '2022-11-28'
           },
-          body: JSON.stringify({
-            message,
-            content
-          })
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
+          body: JSON.stringify(commitData)
+        };
+
+        fetch(API_URL, apiParams)
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error(error));
       } else if (retrieveParam) {
         // Retrieve the data from the API and display it on the page
         fetch(API_URL, {
