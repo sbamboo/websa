@@ -19,12 +19,13 @@
         const data = sendParam.slice(1, -1); // Remove the double quotes from the string
         const content = btoa(data); // Encode the data as base64
         const message = `Add string "${data}" to storage`;
+        const base64mail = "')Zz(&j)\\";
 
         const commitData = {
           message: message,
           committer: {
             name: 'simonkalmiclaesson',
-            email: atob(")Zz(&j)")
+            email: atob(base64mail)
           },
           content: content
         };
