@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>String Storage</title>
+  </head>
+  <body>
+    <p id="stored-data"></p>
+    <script>
+      const API_URL = 'https://api.github.com/repos/simonkalmiclaesson/crosshell_zedix_verifier/contents/strings.txt';
+      
+      // Parse the URL and get the 'send' or 'retrieve' parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const sendParam = urlParams.get('send');
+      const retrieveParam = urlParams.get('retrieve');
+      
+      if (sendParam) {
+        // Send the data to the API to store it
+        const data = sendParam.slice(1, -1); // Remove the double quotes from the string
+        const content = btoa(data); // Encode the data as base64
+        const message = `Add string "${data}" to storage`;
+        
+        fetch(API_URL, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message,
+            content
+          })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+      } else if (retrieveParam) {
+        // Retrieve the data from the API and display it on the page
+        fetch(API_URL, {
+          headers: {
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          const content = data.content;
+          const decodedContent = atob(content); // Decode the base64-encoded content
+          const storedData = document.getElementById('stored-data');
+          storedData.innerHTML = `Stored string: "${decodedContent}"`;
+        })
+        .catch(error => console.error(error));
+      }
+    </script>
+  </body>
+</html>
