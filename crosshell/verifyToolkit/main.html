@@ -7,7 +7,7 @@
   <body>
     <p id="stored-data"></p>
     <script>
-      const API_URL = 'https://api.github.com/repos/<GITHUB_USERNAME>/<REPO_NAME>/contents/strings.txt';
+      const API_URL = 'https://api.github.com/repos/simonkalmiclaesson/crosshell_zedix_verifier/contents/strings.txt';
 
       // Parse the URL and get the 'send' or 'retrieve' parameter
       const urlParams = new URLSearchParams(window.location.search);
@@ -23,8 +23,8 @@
         const commitData = {
           message: message,
           committer: {
-            name: 'Monalisa Octocat',
-            email: 'octocat@github.com'
+            name: 'simonkalmiclaesson',
+            email: atob(")Zz(&j)")
           },
           content: content
         };
