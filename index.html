@@ -13,10 +13,11 @@
             const urlParams = new URLSearchParams(queryString);
             const id = urlParams.get('id')
             // Lists
-            id_shorteners = "01","02"
+            id_shorteners = "01","02","03"
             // Url locations
             urllocation_01 = "https://raw.githubusercontent.com/sbamboo/serverpacks/main/The%20Axolot%2077/3.0_info.txt"
             urllocation_02 = "https://raw.githubusercontent.com/sbamboo/serverpacks/main/The%20Axolot%2077/3.1_info.txt"
+            urllocation_03 = "https://raw.githubusercontent.com/sbamboo/serverpacks/main/The%20Axolot%2077/3.2_info.txt"
             //id
             if (id) {
                 //01
@@ -26,6 +27,10 @@
                 //02
                 if (id == "02") {
                     window.location.href = urllocation_02;
+                }
+                //03
+                if (id == "03") {
+                    window.location.href = urllocation_03;
                 }
             }
         </script>
