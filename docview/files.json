@@ -1,8 +1,13 @@
 {
-    "Resourcepacks":{
-       "TheAxolot77": {
-         "3.0": "https://raw.githubusercontent.com/sbamboo/serverpacks/main/The%20Axolot%2077/3.0_info.txt",
-         "2.0": "https://raw.githubusercontent.com/sbamboo/serverpacks/main/The%20Axolot%2077/2.0_info.txt"
+    "Item1":{
+       "Item2": "https://raw.githubusercontent.com/sbamboo/serverpacks/main/The%20Axolot%2077/3.0_info.txt",
+       "Item4": {
+         "Item5": "<url-to-mdfile>"
+       },
+       "Item6": "<url-to-mdfile>",
+       "Item7": {
+         "Item8": "<url-to-mdfile>",
+         "Item9": "<url-to-mdfile>"
        }
     }
   }
