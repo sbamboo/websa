@@ -14,6 +14,12 @@
         document.getElementById('markdown-content').innerHTML = html;
       }
       
+      function applyCss(css) {
+        const style = document.createElement('style');
+        style.textContent = css;
+        document.head.appendChild(style);
+      }
+
       const urlParams = new URLSearchParams(window.location.search);
       const markdownUrl = urlParams.get('markdown');
       const cssUrl = urlParams.get('css');
@@ -22,16 +28,13 @@
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
           if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
+            const css = xhr.responseText;
+            console.log(css);
+            applyCss(css);
           }
         };
         xhr.open('GET', cssUrl, true);
         xhr.send();
-        
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = cssUrl;
-        document.head.appendChild(link);
       }
       
       if (markdownUrl) {
