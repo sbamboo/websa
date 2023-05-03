@@ -15,10 +15,14 @@
       }
       
       function applyCss(css) {
-        const style = document.createElement('style');
-        style.textContent = css;
-        document.head.appendChild(style);
+        const blob = new Blob([css], { type: 'text/css' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = url;
+        document.head.appendChild(link);
       }
+
 
       const urlParams = new URLSearchParams(window.location.search);
       const markdownUrl = urlParams.get('markdown');
