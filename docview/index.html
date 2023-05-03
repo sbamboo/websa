@@ -16,9 +16,6 @@
     <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
-      //No chache
-      const noCache = urlParams.get('noChache');
-      
       //Markdown & CSS code
       function processMarkdown(data) {
         var converter = new showdown.Converter();
@@ -47,7 +44,6 @@
           }
         };
         xhr.open('GET', cssUrl, true);
-        if (noCache) { xhr.setRequestHeader('Cache-Control', 'no-cache') }
         xhr.send();
       }
       
@@ -59,7 +55,6 @@
           }
         };
         xhr.open('GET', markdownUrl, true);
-        if (noCache) { xhr.setRequestHeader('Cache-Control', 'no-cache') }
         xhr.send();
       }
       //Start of Sidebar code
@@ -116,7 +111,7 @@
             buildFileTree(jsonData, sidebar.querySelector('#filetree'));
           }
         };
-        if (noCache) { xhr.setRequestHeader('Cache-Control', 'no-cache') }
+
         xhr.send();
       }
       const json = urlParams.get('json')
