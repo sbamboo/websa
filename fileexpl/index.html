@@ -22,12 +22,6 @@
         a.textContent = "📁"+key;
         li.appendChild(a);
         ul.appendChild(li);
-
-        // Add expand/collapse functionality
-        a.addEventListener('click', function() {
-          this.parentElement.classList.toggle('open');
-        });
-
         buildFileTree(value, li);
       } else {
         // File
