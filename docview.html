@@ -6,11 +6,12 @@
   </head>
   <body>
     <div id="markdown-content"></div>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
     <script>
       function processMarkdown(data) {
         console.log(data); // log the Markdown content to the console
-        const html = marked(data);
+        var converter = new showdown.Converter();
+        const html = converter.makeHtml(data);
         document.getElementById('markdown-content').innerHTML = html;
       }
       
