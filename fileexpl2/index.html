@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>File Explorer</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div id="sidebar">
+    <ul id="filetree"></ul>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const filetree = sidebar.querySelector('#filetree');
+
+    function buildFileTree(jsonData, parent) {
+      const ul = document.createElement('ul');
+      parent.appendChild(ul);
+
+      for (const [key, value] of Object.entries(jsonData)) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.textContent = key;
+        li.appendChild(a);
+        ul.appendChild(li);
+
+        if (typeof value === 'object') {
+          // Folder
+          li.classList.add('folder');
+
+          a.addEventListener('click', function() {
+            li.classList.toggle('open');
+          });
+
+          a.addEventListener('click', function(e) {
+            e.preventDefault();
+            renderSidebar(value);
+          });
+          buildFileTree(value, li);
+        } else {
+          // File
+          li.classList.add('file');
+
+          a.href = value;
+          a.target = '_blank';
+
+          a.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = this.href;
+          });
+        }
+      }
+    }
+
+    function loadFileTreeFromJson(jsonUrl) {
+      fetch(jsonUrl)
+        .then(response => response.json())
+        .then(jsonData => buildFileTree(jsonData, filetree));
+    }
+
+    function renderSidebar(data) {
+      filetree.innerHTML = '';
+      buildFileTree(data, filetree);
+    }
+
+    const jsonUrl = new URLSearchParams(window.location.search).get('json');
+    loadFileTreeFromJson(json);
+</script>
