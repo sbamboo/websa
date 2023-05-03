@@ -1,0 +1,28 @@
+<body>
+    <div id="markdown-content"></div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+      function processMarkdown(data) {
+        const html = marked(data);
+        document.getElementById('markdown-content').innerHTML = html;
+      }
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const markdownUrl = urlParams.get('markdown');
+      const cssUrl = urlParams.get('css');
+      
+      if (cssUrl) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = cssUrl;
+        document.head.appendChild(link);
+      }
+      
+      if (markdownUrl) {
+        const script = document.createElement('script');
+        script.src = `${markdownUrl}?callback=processMarkdown`;
+        document.body.appendChild(script);
+      }
+    </script>
+  </body>
+  
