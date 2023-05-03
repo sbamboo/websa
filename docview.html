@@ -1,39 +1,40 @@
-<body>
-  <div id="markdown-content"></div>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-    function processMarkdown(data) {
-      console.log(data); // log the Markdown content to the console
-      const html = marked(data);
-      document.getElementById('markdown-content').innerHTML = html;
-    }
-    
-    const urlParams = new URLSearchParams(window.location.search);
-    const markdownUrl = urlParams.get('markdown');
-    const cssUrl = urlParams.get('css');
-    
-    if (cssUrl) {
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          const style = document.createElement('style');
-          style.innerHTML = xhr.responseText;
-          document.head.appendChild(style);
-        }
-      };
-      xhr.open('GET', cssUrl, true);
-      xhr.send();
-    }
-    
-    if (markdownUrl) {
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          processMarkdown(xhr.responseText);
-        }
-      };
-      xhr.open('GET', markdownUrl, true);
-      xhr.send();
-    }
-  </script>
-</body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Markdown Viewer</title>
+  </head>
+  <body>
+    <div id="markdown-content"></div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+      function processMarkdown(data) {
+        console.log(data); // log the Markdown content to the console
+        const html = marked(data);
+        document.getElementById('markdown-content').innerHTML = html;
+      }
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const markdownUrl = urlParams.get('markdown');
+      const cssUrl = urlParams.get('css');
+      
+      if (cssUrl) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = cssUrl;
+        document.head.appendChild(link);
+      }
+      
+      if (markdownUrl) {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            processMarkdown(xhr.responseText);
+          }
+        };
+        xhr.open('GET', markdownUrl, true);
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
