@@ -18,18 +18,14 @@
       if (typeof value === 'object') {
         // Folder
         var li = document.createElement('li');
-        li.classList.add('collapsed'); // add collapsed class by default
         var a = document.createElement('a');
         a.textContent = key;
         li.appendChild(a);
         ul.appendChild(li);
 
         // Add expand/collapse functionality
-        a.addEventListener('click', function(e) {
-          e.preventDefault();
-          var parentLi = this.parentElement;
-          parentLi.classList.toggle('collapsed');
-          parentLi.classList.toggle('open');
+        a.addEventListener('click', function() {
+          this.parentElement.classList.toggle('open');
         });
 
         buildFileTree(value, li);
@@ -38,7 +34,8 @@
         var li = document.createElement('li');
         var a = document.createElement('a');
         a.textContent = key;
-        a.setAttribute('href', value);
+        a.href = value;
+        a.target = '_blank';
         li.appendChild(a);
         ul.appendChild(li);
         
@@ -46,6 +43,14 @@
         a.addEventListener('click', function(e) {
           e.preventDefault();
           window.location.href = this.href;
+        });
+      }
+      
+      // Add click event listener to folders to render the sidebar
+      if (typeof value === 'object') {
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          renderSidebar(value);
         });
       }
     }
@@ -66,11 +71,9 @@
     xhr.send();
   }
 
-
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const json = urlParams.get('json')
   loadFileTreeFromJson(json);
-
 
 </script>
