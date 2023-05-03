@@ -1,14 +1,4 @@
-<head>
-  <link rel="stylesheet" href="./index.css">
-</head>
-
-<div id="sidebar">
-  <ul id="filetree">
-  </ul>
-</div>
-
-<script>
-  function buildFileTree(jsonData, parent) {
+function buildFileTree(jsonData, parent) {
     var ul = document.createElement('ul');
     parent.appendChild(ul);
 
@@ -64,10 +54,3 @@
 
     xhr.send();
   }
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const json = urlParams.get('json')
-  loadFileTreeFromJson(json);
-
-</script>

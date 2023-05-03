@@ -3,8 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <title>Markdown Viewer</title>
+    <link rel="stylesheet" href="./filetree.css">
   </head>
   <body>
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <ul id="filetree">
+      </ul>
+    </div>
+    <!-- MarkdownContent -->
     <div id="markdown-content"></div>
     <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
     <script>
@@ -49,6 +56,14 @@
         };
         xhr.open('GET', markdownUrl, true);
         xhr.send();
+      }
+    </script>
+    <script src="./filetree.js">
+      const queryString2 = window.location.search;
+      const urlParams2 = new URLSearchParams(queryString2);
+      const json = urlParams2.get('json')
+      if (json) {
+        loadFileTreeFromJson(json);
       }
     </script>
   </body>
