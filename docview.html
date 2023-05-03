@@ -9,7 +9,6 @@
     <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
     <script>
       function processMarkdown(data) {
-        console.log(data); // log the Markdown content to the console
         var converter = new showdown.Converter();
         const html = converter.makeHtml(data);
         document.getElementById('markdown-content').innerHTML = html;
@@ -20,6 +19,15 @@
       const cssUrl = urlParams.get('css');
       
       if (cssUrl) {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+          }
+        };
+        xhr.open('GET', cssUrl, true);
+        xhr.send();
+        
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = cssUrl;
