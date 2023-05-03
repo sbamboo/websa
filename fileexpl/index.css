@@ -64,7 +64,6 @@
 }
 
 #sidebar ul li.file > a:before {
-    content: "\f15b";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     margin-right: 5px;

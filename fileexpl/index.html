@@ -19,7 +19,7 @@
         // Folder
         var li = document.createElement('li');
         var a = document.createElement('a');
-        a.textContent = key;
+        a.textContent = "📁"+key;
         li.appendChild(a);
         ul.appendChild(li);
 
@@ -33,7 +33,7 @@
         // File
         var li = document.createElement('li');
         var a = document.createElement('a');
-        a.textContent += key;
+        a.textContent = "📄"+key;
         a.href = value;
         a.target = '_blank';
         li.appendChild(a);
