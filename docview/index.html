@@ -15,6 +15,11 @@
     <div id="markdown-content"></div>
     <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
     <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      //No chache
+      const noCache = urlParams.get('noChache');
+      
+      //Markdown & CSS code
       function processMarkdown(data) {
         var converter = new showdown.Converter();
         const html = converter.makeHtml(data);
@@ -30,8 +35,6 @@
         document.head.appendChild(link);
       }
 
-
-      const urlParams = new URLSearchParams(window.location.search);
       const markdownUrl = urlParams.get('markdown');
       const cssUrl = urlParams.get('css');
       
@@ -44,6 +47,7 @@
           }
         };
         xhr.open('GET', cssUrl, true);
+        if (noCache) { xhr.setRequestHeader('Cache-Control', 'no-cache') }
         xhr.send();
       }
       
@@ -55,10 +59,10 @@
           }
         };
         xhr.open('GET', markdownUrl, true);
+        if (noCache) { xhr.setRequestHeader('Cache-Control', 'no-cache') }
         xhr.send();
       }
-    </script>
-    <script>
+      //Start of Sidebar code
       function buildFileTree(jsonData, parent) {
         var ul = document.createElement('ul');
         parent.appendChild(ul);
@@ -112,15 +116,14 @@
             buildFileTree(jsonData, sidebar.querySelector('#filetree'));
           }
         };
-
+        if (noCache) { xhr.setRequestHeader('Cache-Control', 'no-cache') }
         xhr.send();
       }
-      const queryString2 = window.location.search;
-      const urlParams2 = new URLSearchParams(queryString2);
-      const json = urlParams2.get('json')
+      const json = urlParams.get('json')
       if (json) {
         loadFileTreeFromJson(json);
       }
+      //End of Sidebar code
     </script>
   </body>
 </html>
