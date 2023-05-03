@@ -34,9 +34,18 @@
         var li = document.createElement('li');
         var a = document.createElement('a');
         a.textContent = key;
-        a.setAttribute('href', value);
+        a.href = value;
+        a.target = '_blank';
         li.appendChild(a);
         ul.appendChild(li);
+      }
+      
+      // Add click event listener to folders to render the sidebar
+      if (typeof value === 'object') {
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          renderSidebar(value);
+        });
       }
     }
   }
@@ -56,9 +65,9 @@
     xhr.send();
   }
 
-
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const json = urlParams.get('json')
   loadFileTreeFromJson(json);
+
 </script>
