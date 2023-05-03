@@ -69,20 +69,3 @@
     font-weight: 900;
     margin-right: 5px;
 }
-
-#sidebar ul li.collapsed > ul {
-    display: none;
-}
-
-#sidebar ul li.collapsed:before {
-    content: '+ ';
-}
-
-#sidebar ul li.open:before {
-    content: '- ';
-}
-
-#sidebar ul li:before {
-    display: inline-block;
-    width: 1.5em;
-}

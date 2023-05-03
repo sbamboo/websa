@@ -8,69 +8,60 @@
 </div>
 
 <script>
-  function buildFileTree(jsonData, parent) {
-    var ul = document.createElement('ul');
-    parent.appendChild(ul);
+function buildFileTree(jsonData, parent) {
+  var ul = document.createElement('ul');
+  parent.appendChild(ul);
 
-    for (var key in jsonData) {
-      var value = jsonData[key];
+  for (var key in jsonData) {
+    var value = jsonData[key];
 
-      if (typeof value === 'object') {
-        // Folder
-        var li = document.createElement('li');
-        li.classList.add('collapsed'); // add collapsed class by default
-        var a = document.createElement('a');
-        a.textContent = key;
-        li.appendChild(a);
-        ul.appendChild(li);
+    if (typeof value === 'object') {
+      // Folder
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.textContent = key;
+      li.appendChild(a);
+      ul.appendChild(li);
+      li.classList.add('closed'); // add 'closed' class to folder li by default
 
-        // Add expand/collapse functionality
-        a.addEventListener('click', function(e) {
-          e.preventDefault();
-          var parentLi = this.parentElement;
-          parentLi.classList.toggle('collapsed');
-          parentLi.classList.toggle('open');
-        });
+      // Add expand/collapse functionality
+      a.addEventListener('click', function() {
+        this.parentElement.classList.toggle('open');
+        this.parentElement.classList.toggle('closed');
+      });
 
-        buildFileTree(value, li);
-      } else {
-        // File
-        var li = document.createElement('li');
-        var a = document.createElement('a');
-        a.textContent = key;
-        a.setAttribute('href', value);
-        li.appendChild(a);
-        ul.appendChild(li);
-        
-        // Add click event listener to files to redirect to the URL
-        a.addEventListener('click', function(e) {
-          e.preventDefault();
-          window.location.href = this.href;
-        });
-      }
+      buildFileTree(value, li);
+    } else {
+      // File
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.textContent = key;
+      a.href = value;
+      a.target = '_blank';
+      li.appendChild(a);
+      ul.appendChild(li);
+
+      // Add click event listener to files to redirect to the URL
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = this.href;
+      });
+    }
+
+    // Add click event listener to folders to render the sidebar
+    if (typeof value === 'object') {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var parentLi = this.parentElement;
+        if (parentLi.classList.contains('closed')) {
+          parentLi.classList.remove('closed');
+          parentLi.classList.add('open');
+        }
+        renderSidebar(value);
+      });
     }
   }
-
-  function loadFileTreeFromJson(jsonUrl) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', jsonUrl, true);
-
-    xhr.onload = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        var jsonData = JSON.parse(xhr.responseText);
-        var sidebar = document.getElementById('sidebar');
-        buildFileTree(jsonData, sidebar.querySelector('#filetree'));
-      }
-    };
-
-    xhr.send();
-  }
-
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const json = urlParams.get('json')
-  loadFileTreeFromJson(json);
+}
 
 
 </script>
