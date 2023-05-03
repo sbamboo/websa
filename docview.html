@@ -29,7 +29,6 @@
         xhr.onreadystatechange = function() {
           if (xhr.readyState === 4 && xhr.status === 200) {
             const css = xhr.responseText;
-            console.log(css);
             applyCss(css);
           }
         };
