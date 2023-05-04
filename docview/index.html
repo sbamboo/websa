@@ -118,6 +118,7 @@
       const queryString2 = window.location.search;
       const urlParams2 = new URLSearchParams(queryString2);
       const json = urlParams2.get('json')
+      console.log(json)
       if (json) {
         loadFileTreeFromJson(json);
       }
