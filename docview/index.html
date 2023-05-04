@@ -119,6 +119,9 @@
   
       if (jsonUrl) {
         loadFileTreeFromJson(jsonUrl);
+        var x = document.getElementById("markdown-content");
+        x.style.position = "absolute";
+        x.style.left = "220px";
       } else {
         var x = document.getElementById("sidebar");
         x.remove()
