@@ -17,6 +17,12 @@
     <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
+      const jsonUrl = urlParams2.get('json')
+      const markdownUrl = urlParams.get('markdown');
+      const cssUrl = urlParams.get('css');
+
+      console.log(json,markdownUrl,cssUrl);
+
       //Markdown & CSS code
       function processMarkdown(data) {
         var converter = new showdown.Converter();
@@ -32,9 +38,6 @@
         link.href = url;
         document.head.appendChild(link);
       }
-
-      const markdownUrl = urlParams.get('markdown');
-      const cssUrl = urlParams.get('css');
       
       if (cssUrl) {
         const xhr = new XMLHttpRequest();
@@ -115,12 +118,12 @@
 
         xhr.send();
       }
-      const queryString2 = window.location.search;
-      const urlParams2 = new URLSearchParams(queryString2);
-      const json = urlParams2.get('json')
-      if (json) {
-      console.log(json)
-        loadFileTreeFromJson(json);
+  
+      if (jsonUrl) {
+        loadFileTreeFromJson(jsonUrl);
+      } else {
+        var x = document.getElementById("sidebar");
+        x.style.display = "block";
       }
       //End of Sidebar code
     </script>
