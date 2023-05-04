@@ -21,8 +21,6 @@
       const markdownUrl = urlParams.get('markdown');
       const cssUrl = urlParams.get('css');
 
-      console.log(jsonUrl,markdownUrl,cssUrl);
-
       //Markdown & CSS code
       function processMarkdown(data) {
         var converter = new showdown.Converter();
@@ -123,7 +121,7 @@
         loadFileTreeFromJson(jsonUrl);
       } else {
         var x = document.getElementById("sidebar");
-        x.style.display = "block";
+        x.remove()
       }
       //End of Sidebar code
     </script>
