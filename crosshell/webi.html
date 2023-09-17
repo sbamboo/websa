@@ -11,10 +11,10 @@
             const urlParams = new URLSearchParams(queryString);
 
             const id = urlParams.get('id')
-            const nid = urlParams.get('nid')
             const giveurl = urlParams.get('giveurl')
             const list = urlParams.get('list')
             const webapp = urlParams.get('webapp')
+            const channel = urlParams.get('channel')
 
             var baseurl = window.location.origin;
 
@@ -24,75 +24,102 @@
                 var baseurl = baseurl_O.concat(baseurl)
             }
 
-            // Lists
-            id_shorteners = "devmode, commonparameters, cs_publicapi, builtincommands, interpriter, crosshellscripting"
+            // zedix channel
+            if (channel == "zedix") {
+                // Lists
+                id_shorteners = "devmode, commonparameters, cs_publicapi, builtincommands, interpriter, crosshellscripting"
 
-            // Url locations
-            urllocation_devmode = "/websa/crosshell/docs/articles/about_devmode.html"
-            urllocation_commonparameters = "/websa/crosshell/docs/articles/about_commonparameters.html"
-            urllocation_cs_publicapi = "/websa/crosshell/docs/articles/about_publicapi.html"
-            urllocation_builtincommands = "/websa/crosshell/docs/articles/about_builtincommands.html"
-            urllocation_interpriter = "/websa/crosshell/docs/articles/about_interpriter.html"
-            urllocation_crosshellscripting = "/websa/crosshell/docs/articles/about_crosshellscripting.html"
+                // Url locations
+                urllocation_devmode = "/websa/crosshell/docs/articles/zedix/about_devmode.html"
+                urllocation_commonparameters = "/websa/crosshell/docs/articles/zedix/about_commonparameters.html"
+                urllocation_cs_publicapi = "/websa/crosshell/docs/articles/zedix/about_publicapi.html"
+                urllocation_builtincommands = "/websa/crosshell/docs/articles/zedix/about_builtincommands.html"
+                urllocation_interpriter = "/websa/crosshell/docs/articles/zedix/about_interpriter.html"
+                urllocation_crosshellscripting = "/websa/crosshell/docs/articles/zedix/about_crosshellscripting.html"
 
-            //list
-            if (list == "True") {
-                document.getElementById("giveurl").innerHTML = "Avaliable Shortening ids: " + id_shorteners;
-            }
+                //list
+                if (list == "True") {
+                    document.getElementById("giveurl").innerHTML = "Avaliable Shortening ids: " + id_shorteners;
+                }
 
-            //giveUrl
-            if (giveurl == "True") {
-                //devmode
-                if (id == "devmode") {
-                    document.getElementById("giveurl").innerHTML = urllocation_devmode;
+                //giveUrl
+                if (giveurl == "True") {
+                    //devmode
+                    if (id == "devmode") {
+                        document.getElementById("giveurl").innerHTML = urllocation_devmode;
+                    }
+                    //commonparameters
+                    if (id == "commonparameters") {
+                        document.getElementById("giveurl").innerHTML = urllocation_commonparameters;
+                    }
+                    //crosshell public api
+                    if (id == "cs_publicapi") {
+                        document.getElementById("giveurl").innerHTML = urllocation_cs_publicapi;
+                    }
+                    //builtin commands
+                    if (id == "builtincommands") {
+                        document.getElementById("giveurl").innerHTML = urllocation_builtincommands;
+                    }
+                    //interpriter
+                    if (id == "interpriter") {
+                        document.getElementById("giveurl").innerHTML = urllocation_interpriter;
+                    }
+                    //crosshellscripting
+                    if (id == "crosshellscripting") {
+                        document.getElementById("giveurl").innerHTML = urllocation_crosshellscripting;
+                    }
+                } else if (id) {
+                    //devmode
+                    if (id == "devmode") {
+                        window.location.href = baseurl.concat(urllocation_devmode);
+                    }
+                    //commonparameters
+                    if (id == "commonparameters") {
+                        window.location.href = baseurl.concat(urllocation_commonparameters);
+                    }
+                    //crosshell public api
+                    if (id == "cs_publicapi") {
+                        window.location.href = baseurl.concat(urllocation_cs_publicapi);
+                    }
+                    //builtin commands
+                    if (id == "builtincommands") {
+                        window.location.href = baseurl.concat(urllocation_builtincommands);
+                    }
+                    //interpriter
+                    if (id == "interpriter") {
+                        window.location.href = baseurl.concat(urllocation_interpriter);
+                    }
+                    //crosshellscripting
+                    if (id == "crosshellscripting") {
+                        window.location.href = baseurl.concat(urllocation_crosshellscripting);
+                    }
                 }
-                //commonparameters
-                if (id == "commonparameters") {
-                    document.getElementById("giveurl").innerHTML = urllocation_commonparameters;
-                }
-                //crosshell public api
-                if (id == "cs_publicapi") {
-                    document.getElementById("giveurl").innerHTML = urllocation_cs_publicapi;
-                }
-                //builtin commands
-                if (id == "builtincommands") {
-                    document.getElementById("giveurl").innerHTML = urllocation_builtincommands;
-                }
-                //interpriter
-                if (id == "interpriter") {
-                    document.getElementById("giveurl").innerHTML = urllocation_interpriter;
-                }
-                //crosshellscripting
-                if (id == "crosshellscripting") {
-                    document.getElementById("giveurl").innerHTML = urllocation_crosshellscripting;
-                }
-            }
+            } else if (channel == "modulo") {
+                // Lists
+                id_shorteners = "moduloformat"
 
-            //id
-            if (id) {
-                //devmode
-                if (id == "devmode") {
-                    window.location.href = baseurl.concat(urllocation_devmode);
+                // Url locations
+                urllocation_moduloformat = "/websa/crosshell/docs/articles/modulo/about_moduloformat.html"
+
+                //list
+                if (list == "True") {
+                    document.getElementById("giveurl").innerHTML = "Avaliable Shortening ids: " + id_shorteners;
                 }
-                //commonparameters
-                if (id == "commonparameters") {
-                    window.location.href = baseurl.concat(urllocation_commonparameters);
+
+                //giveUrl
+                if (giveurl == "True") {
+                    //devmode
+                    if (id == "moduloformat") {
+                        document.getElementById("giveurl").innerHTML = urllocation_moduloformat;
+                    }
                 }
-                //crosshell public api
-                if (id == "cs_publicapi") {
-                    window.location.href = baseurl.concat(urllocation_cs_publicapi);
-                }
-                //builtin commands
-                if (id == "builtincommands") {
-                    window.location.href = baseurl.concat(urllocation_builtincommands);
-                }
-                //interpriter
-                if (id == "interpriter") {
-                    window.location.href = baseurl.concat(urllocation_interpriter);
-                }
-                //crosshellscripting
-                if (id == "crosshellscripting") {
-                    window.location.href = baseurl.concat(urllocation_crosshellscripting);
+
+                //id
+                if (id) {
+                    //devmode
+                    if (id == "moduloformat") {
+                        window.location.href = baseurl.concat(urllocation_moduloformat);
+                    }
                 }
             }
         </script>
