@@ -18,7 +18,6 @@
         }
 
         const unicodeParam = getParameterByName("unicode");
-        const imageContainer = document.getElementById("imageContainer");
 
         if (unicodeParam) {
             try {
@@ -33,11 +32,12 @@
                 // Convert the canvas to a data URL
                 const dataURL = canvas.toDataURL("image/png");
 
-                // Display the data URL as plain text
-                document.getElementById("giveurl").innerHTML = dataURL;
+                // Return the data URL as a JSON response
+                const responseObj = { dataURL: dataURL };
+                document.getElementById("giveurl").textContent = JSON.stringify(responseObj);
             } catch (error) {
-                // Do nothing upon errors
-                imageContainer.textContent = '';
+                // Handle errors
+                document.getElementById("giveurl").textContent = '';
             }
         }
     </script>
