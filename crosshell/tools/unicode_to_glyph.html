@@ -32,12 +32,11 @@
                 // Convert the canvas to a data URL
                 const dataURL = canvas.toDataURL("image/png");
 
-                // Return the data URL as a JSON response
-                const responseObj = { dataURL: dataURL };
-                document.getElementById("giveurl").textContent = JSON.stringify(responseObj);
+                // Display the data URL as plain text
+                document.getElementById("giveurl").innerHTML = dataURL;
             } catch (error) {
-                // Handle errors
-                document.getElementById("giveurl").textContent = '';
+                // Do nothing upon errors
+                document.getElementById("giveurl").innerHTML = "";
             }
         }
     </script>
