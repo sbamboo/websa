@@ -35,6 +35,9 @@
 
                 // Display the data URL as plain text
                 document.getElementById("giveurl").innerHTML = dataURL;
+            } catch (error) {
+                // Do nothing upon errors
+                imageContainer.textContent = '';
             }
         }
     </script>
