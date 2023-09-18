@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unicode Character Image Generator</title>
+</head>
+<body>
+    <div id="imageContainer"></div>
+    
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+            const results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return "";
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        const unicodeParam = getParameterByName("unicode");
+        const imageContainer = document.getElementById("imageContainer");
+
+        if (unicodeParam) {
+            try {
+                const unicodeCharacter = String.fromCodePoint(parseInt(unicodeParam, 16));
+                const canvas = document.createElement("canvas");
+                canvas.width = 100; // Adjust the canvas size as needed
+                canvas.height = 100;
+                const ctx = canvas.getContext("2d");
+                ctx.font = "48px Arial"; // Adjust the font and size as needed
+                ctx.fillText(unicodeCharacter, 10, 50);
+
+                // Convert the canvas to a data URL
+                const dataURL = canvas.toDataURL("image/png");
+
+                // Display the data URL as plain text
+                imageContainer.textContent = dataURL;
+            } catch (error) {
+                // Do nothing upon errors
+                imageContainer.textContent = '';
+            }
+        } else {
+            // Do nothing if no Unicode character parameter is provided
+            imageContainer.textContent = '';
+        }
+    </script>
+</body>
+</html>
