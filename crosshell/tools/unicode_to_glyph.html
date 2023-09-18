@@ -4,7 +4,7 @@
     <title>Unicode Character Image Generator</title>
 </head>
 <body>
-    <div id="imageContainer"></div>
+    <p id="giveurl"></p>
     
     <script>
         function getParameterByName(name, url) {
@@ -34,14 +34,8 @@
                 const dataURL = canvas.toDataURL("image/png");
 
                 // Display the data URL as plain text
-                imageContainer.textContent = dataURL;
-            } catch (error) {
-                // Do nothing upon errors
-                imageContainer.textContent = '';
+                document.getElementById("giveurl").innerHTML = dataURL;
             }
-        } else {
-            // Do nothing if no Unicode character parameter is provided
-            imageContainer.textContent = '';
         }
     </script>
 </body>
