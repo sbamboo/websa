@@ -125,7 +125,7 @@ if (markdownUrl) {
 //Sidebar code
 function toggleUlFromButtom(id) {
   var btn = document.getElementById(id);
-  var ul = document.getElementById("parent@"+id);)
+  var ul = document.getElementById("parent@"+id);
   if (ul.classList.contains('collapsed')) {
     ul.classList.remove('collapsed');
     ul.classList.add('expanded');
