@@ -221,14 +221,27 @@ function getFirstH1Text(element, fallback = "page") {
   return firstH1 ? firstH1.textContent : fallback;
 }
 
-function addElemForPage(parent) {
+function addElemForPage(urlParams,parent) {
   var ul = document.createElement('ul'); // Create parent ul
   ul.classList.add("no-list-style");
   parent.appendChild(ul);
   // Get key & value
   var content = document.getElementById('markdown-content');
-  var key = getFirstH1Text(content,"Current Page");
+  if (urlParams.has('markdown')) {
+    var fallback = "Current Page";
+  } else {
+    var fallback = "Empty Page";
+  }
+  var key = getFirstH1Text(content,fallback);
   var value = window.location.href;
+  // Fill page
+  var wrapper = document.createElement('div');
+  var div = document.createElement('div');
+  wrapper.classList.add("no-loaded-page-info-wrapper");
+  div.classList.add("no-loaded-page-info");
+  div.innerHTML = '<h2>No page loaded</h2><br><p>To view a markdown document on this page ad the <i>?markdown=</i> urlParameter with a link to the document.<br>Alternatively go to the "Additional Info" section in the sidebar and goto Todo or Readme.</p>';
+  wrapper.appendChild(div);
+  content.appendChild(wrapper);
   // Generate
   var li = document.createElement('li');
   var a = document.createElement('a');
@@ -258,6 +271,6 @@ if (jsonUrl) {
     }
   } else {
     var sidebar = document.getElementById('sidebar');
-    addElemForPage(sidebar.querySelector('#filetree'));
+    addElemForPage(urlParams,sidebar.querySelector('#filetree'));
   }
 }

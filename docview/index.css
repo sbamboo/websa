@@ -160,3 +160,20 @@
 .css-link:active {
     color: var(--sb-addinf-color-active);
 }
+
+.no-loaded-page-info-wrapper {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+}
+.no-loaded-page-info {
+    justify-self: center;
+    padding-top: 20vh;
+    text-align: center;
+}
+.no-loaded-page-info h2 {
+    width: 100%;
+    border-bottom: 2px solid var(--sb-divider-color);
+    font-size: 30px;
+    padding-bottom: 10px;
+}
