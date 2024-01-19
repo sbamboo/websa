@@ -7,22 +7,24 @@
     --sidebar-width: 15vw;
 }
 
-@media screen and (prefers-color-scheme: light) {
+@media (prefers-color-scheme: light) {
     :root {
         --sidebar-background: #f3f3f3;
         --collapse-arrow-color: #616161;
         --sb-item-text-color: #616161;
+        --sb-expanded-line-color: #d5d5d5;
         --sb-item-background: #f3f3f3;
         --sb-item-background-hover: #e4e6f1;
     }
 }
 
-@media screen and (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
     :root {
-        --sidebar-background: #252525;
-        --collapse-arrow-color: #afafaf;
-        --sb-item-text-color: #ccc;
-        --sb-item-background: #252525;
+        --sidebar-background: #26292f;
+        --collapse-arrow-color: #50535d;
+        --sb-item-text-color: #afafaf;
+        --sb-expanded-line-color: #373a42;
+        --sb-item-background: #26292f;
         --sb-item-background-hover: #37373d;
     }
 }
@@ -41,7 +43,9 @@ body {
 }
 
 #markdown-content {
-    width: calc( 100vw - var(--sidebar-width));
+    width: calc( 100vw - var(--sidebar-width) - 2vw);
+    padding-left: 2vw;
+    padding-right: 2vw;
     margin-left: var(--sidebar-width);
 }
 
@@ -68,7 +72,9 @@ body {
     width: 100%;
 }
 .collapseButton ~ ul {
-    padding-left: 20px;
+    padding-left: 10px;
+    margin-left: 10px;
+    border-left: 2px solid var(--sb-expanded-line-color);
 }
 .collapseButton:active {
 }
