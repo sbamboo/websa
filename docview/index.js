@@ -185,11 +185,11 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass, preTempClass
       if (key.includes("collapsed:")) {
         key = key.replace("collapsed:","");
         preTempClass = "collapsed";
-        print("Found " + preTempClass + " in: "+key);
+        console.log("Found " + preTempClass + " in: "+key);
       } else if (key.includes("expanded:")) {
         key = key.replace("expanded:","");
         preTempClass = "expanded";
-        print("Found " + preTempClass + " in: "+key);
+        console.log("Found " + preTempClass + " in: "+key);
       }
       // Add content
       button.innerHTML = prefix+'<p id="folderTxt"> '+key+'</p>';
