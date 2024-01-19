@@ -182,8 +182,8 @@
 .itemname-img {
     width: var(--sidebar-font-size);
     height: var(--sidebar-font-size);
-    margin: none !important;
-    padding: none !important;
+    margin: 0px !important;
+    padding: 0px !important;
     margin-right: 5px;
     border-radius: 5px;
     object-fit: cover;
