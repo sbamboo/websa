@@ -150,12 +150,12 @@ body {
 .addinfo-data,.infotx,.infotx p {
     color: var(--sb-item-text-color);
 }
-.css-link a {
+.css-link {
     color: var(--sb-addinf-color);
 }
-.css-link:hover a {
+.css-link:hover {
     color: var(--sb-addinf-color-hover);
 }
-.css-link:active a {
+.css-link:active {
     color: var(--sb-addinf-color-active);
 }
