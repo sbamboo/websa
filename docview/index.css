@@ -151,6 +151,7 @@ body {
     color: var(--sb-item-text-color);
 }
 .css-link {
+    text-decoration: underline;
     color: var(--sb-addinf-color);
 }
 .css-link:hover {
