@@ -1,0 +1,43 @@
+body {
+    font-family: "Varela Round";
+    font-size: 19px;
+}
+h1 {
+    text-align: center;
+    font-family: "Helvetica";
+}
+img {
+    border-radius: 40px;
+    max-width: 50%;
+    padding-top: 15px;
+}
+
+@media screen and (prefers-color-scheme: light) {
+    body {
+        background-color: #f4f4f4;
+    }
+    h1 {
+        border-bottom: 2px solid #000000;
+    }
+    body,h1,p,b {
+        color: #2c2c2c;
+    }
+    i {
+        color: #3b3b3b;
+    }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        background-color: #1e1e1e;
+    }
+    h1 {
+        border-bottom: 2px solid #888888;
+    }
+    body,h1,p,b {
+        color: #888888;
+    }
+    i {
+        color: #b4b4b4;
+    }
+}
