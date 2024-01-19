@@ -114,11 +114,12 @@ body {
 #addinfo,#addinfo-toggle {
     width: var(--sidebar-width);
 }
-#addinfo-toggle {
+#addinfo-toggle,#addinfo-toggle p {
     border-bottom: none;
     border-left: none;
     border-right: none;
     background-color: var(--sidebar-background);
+    color: var(--sb-item-text-color);
 }
 #addinfo {
     padding-top: 5px;
@@ -146,19 +147,15 @@ body {
     text-decoration: underline;
 }
 
-#addinfo-toggle {
+.addinfo-data,.infotx {
     color: var(--sb-item-text-color);
 }
-
-.infotx {
-    color: var(--sb-item-text-color);
-}
-.infotx a {
+.addinfo-data a {
     color: var(--sb-addinf-color);
 }
-.infotx:hover a {
+.addinfo-data:hover a {
     color: var(--sb-addinf-color-hover);
 }
-.infotx:active a {
+.addinfo-data:active a {
     color: var(--sb-addinf-color-active);
 }
