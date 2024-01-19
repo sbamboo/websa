@@ -47,15 +47,15 @@ if (urlParams.has('defState')) {
 }
 if (urlParams.has('markdown')) {
   const infoMd_url = new URL(markdownUrl);
-  infoMd.innerHTML = '<p class="addinfo-data">MD:   <a href="' + markdownUrl + '">' + infoMd_url.hostname + '</a></p>'
+  infoMd.innerHTML = '<p class="addinfo-data">MD:   <a class="css-link" href="' + markdownUrl + '">' + infoMd_url.hostname + '</a></p>'
 }
 if (urlParams.has('css')) {
   const infoCSS_url = new URL(cssUrl);
-  infoCSS.innerHTML = '<p class="addinfo-data">CSS:  <a href="' + cssUrl + '">' + infoCSS_url.hostname + '</a></p>'
+  infoCSS.innerHTML = '<p class="addinfo-data">CSS:  <a class="css-link" href="' + cssUrl + '">' + infoCSS_url.hostname + '</a></p>'
 }
 if (urlParams.has('json')) {
   const infoJSON_url = new URL(jsonUrl);
-  infoJSON.innerHTML = '<p class="addinfo-data">JSON: <a href="' + jsonUrl + '">' + infoJSON_url.hostname + '</a></p>'
+  infoJSON.innerHTML = '<p class="addinfo-data">JSON: <a class="css-link" href="' + jsonUrl + '">' + infoJSON_url.hostname + '</a></p>'
 } else if (urlParams.has('jsonRaw')) {
   infoJSON.innerHTML = '<p class="addinfo-data">JSON: RAW</p>'
 }
@@ -64,8 +64,8 @@ if (urlParams.has('json')) {
 var baseUrl = url.href.replace(url.search,"");
 var todoUrl = baseUrl.concat("?markdown=" + localRedirect(url,"todo.md") + "&css=" + localRedirect(url,"styles/standardauto.css") +"&json=" + localRedirect(url,"files.json"))
 var readmeUrl = baseUrl.concat("?markdown=" + localRedirect(url,"readme.md") + "&css=" + localRedirect(url,"styles/standardauto.css") +"&json=" + localRedirect(url,"files.json"))
-infoTodo.innerHTML = '<p>Readme: <a href="' + todoUrl + '">' + url.origin + '</a></p>'
-infoReadme.innerHTML = '<p>Dev Todo: <a href="' + readmeUrl + '">' + url.origin + '</a></p>'
+infoTodo.innerHTML = '<p>Readme: <a class="css-link" href="' + todoUrl + '">' + url.origin + '</a></p>'
+infoReadme.innerHTML = '<p>Dev Todo: <a class="css-link" href="' + readmeUrl + '">' + url.origin + '</a></p>'
 
 // AdditionalInfo toggle code
 var addinfo = document.getElementById("addinfo-toggle");

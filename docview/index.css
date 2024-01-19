@@ -150,30 +150,12 @@ body {
 .addinfo-data,.infotx,.infotx p {
     color: var(--sb-item-text-color);
 }
-.addinfo-data a {
+.css-link a {
     color: var(--sb-addinf-color);
 }
-.addinfo-data:hover a {
+.css-link:hover a {
     color: var(--sb-addinf-color-hover);
 }
-.addinfo-data:active a {
-    color: var(--sb-addinf-color-active);
-}
-.infotx p a {
-    color: var(--sb-addinf-color);
-}
-.infotx:hover p a {
-    color: var(--sb-addinf-color-hover);
-}
-.infotx:active p a {
-    color: var(--sb-addinf-color-active);
-}
-.infotx a {
-    color: var(--sb-addinf-color);
-}
-.infotx:hover a {
-    color: var(--sb-addinf-color-hover);
-}
-.infotx:active a {
+.css-link:active a {
     color: var(--sb-addinf-color-active);
 }
