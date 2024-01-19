@@ -285,8 +285,12 @@ function addElemForPage(urlParams,parent) {
   }
   // Add content
   a.innerHTML = '<p id="itemTxt"> '+key+'</p>';
+  // Handle noNewWindow
+  if (value.includes("_blank:")) {
+    value = value.replace("_blank:","")
+    a.target = '_blank';
+  }
   // Add with link
-  a.href = value;
   li.appendChild(a);
   ul.appendChild(li);
 }
