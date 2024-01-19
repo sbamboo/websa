@@ -136,6 +136,19 @@ function toggleUlFromButtom(id) {
     btn.innerHTML = btn.innerHTML.replace(expanded_prefix,collapsed_prefix)
   }
 }
+
+function addEmptyPageInfo() {
+  var content = document.getElementById('markdown-content');
+  // Fill page
+  var wrapper = document.createElement('div');
+  var div = document.createElement('div');
+  wrapper.classList.add("no-loaded-page-info-wrapper");
+  div.classList.add("no-loaded-page-info");
+  div.innerHTML = '<h2>No page loaded</h2><br><p>To view a markdown document on this page ad the <i>?markdown=</i> urlParameter with a link to the document.<br>Alternatively go to the "Additional Info" section in the sidebar and goto Todo or Readme.</p>';
+  wrapper.appendChild(div);
+  content.appendChild(wrapper);
+}
+
 function buildFileTree(jsonData, parent, depth, parentId, preClass, preTempClass=null) {
   console.log("building file tree: ",preClass,preTempClass);
   var ul = document.createElement('ul'); // Create parent ul
@@ -279,13 +292,7 @@ function addElemForPage(urlParams,parent) {
   var key = getFirstH1Text(content,fallback);
   var value = window.location.href;
   // Fill page
-  var wrapper = document.createElement('div');
-  var div = document.createElement('div');
-  wrapper.classList.add("no-loaded-page-info-wrapper");
-  div.classList.add("no-loaded-page-info");
-  div.innerHTML = '<h2>No page loaded</h2><br><p>To view a markdown document on this page ad the <i>?markdown=</i> urlParameter with a link to the document.<br>Alternatively go to the "Additional Info" section in the sidebar and goto Todo or Readme.</p>';
-  wrapper.appendChild(div);
-  content.appendChild(wrapper);
+  addEmptyPageInfo();
   // Generate
   var li = document.createElement('li');
   var a = document.createElement('a');
@@ -321,6 +328,9 @@ function addElemForPage(urlParams,parent) {
 
 if (jsonUrl) {
   loadFileTreeFromJson(jsonUrl);
+  if (urlParams.has("markdown")) {} else {
+    addEmptyPageInfo();
+  }
 } else {
   if (urlParams.has('jsonRaw')) {
     var jsonrawValue = urlParams.get('jsonRaw');
