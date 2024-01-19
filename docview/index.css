@@ -16,6 +16,9 @@
         --sb-item-background: #f3f3f3;
         --sb-item-background-hover: #e4e6f1;
         --sb-divider-color: #d5d5d5;
+        --sb-addinf-color: #616161;
+        --sb-addinf-color-hover: #838383;
+        --sb-addinf-color-active: #7072c6;
     }
 }
 
@@ -28,6 +31,9 @@
         --sb-item-background: #26292f;
         --sb-item-background-hover: #37373d;
         --sb-divider-color: #373a42;
+        --sb-addinf-color: #afafaf;
+        --sb-addinf-color-hover: #50535d;
+        --sb-addinf-color-active: #2f3c65;
     }
 }
 
@@ -138,4 +144,21 @@ body {
 
 .addinfo-data a {
     text-decoration: underline;
+}
+
+#addinfo-toggle {
+    color: var(--sb-item-text-color);
+}
+
+.infotx {
+    color: var(--sb-item-text-color);
+}
+.infotx a {
+    color: var(--sb-addinf-color);
+}
+.infotx:hover a {
+    color: var(--sb-addinf-color-hover);
+}
+.infotx:active a {
+    color: var(--sb-addinf-color-active);
 }
