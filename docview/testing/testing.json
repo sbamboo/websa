@@ -2,7 +2,7 @@
     "Testing Sites":{
       "Source": "https://github.com/sbamboo/websa/tree/main/docview",
       "Socials": {
-        "_blank:noicon:;imgst;https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png;imgen;Instagram": "https://instagram.com/"
+        "noicon:;imgst;https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png;imgen;Instagram": "_blank:https://instagram.com/"
       },
       "Testing Docs": {
         "test1":"https://sbamboo.github.io/websa/docview/?markdown=https://sbamboo.github.io/websa/docview/testing/test1.md&css=https://sbamboo.github.io/websa/docview/styles/standardauto.css&json=https://sbamboo.github.io/websa/docview/testing/testing.json"

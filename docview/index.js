@@ -166,8 +166,10 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       }
       // Icon handle
       if (key.includes("noicon:")) {
+        console.log("Found noicon in: "+key);
         key = key.replace("noicon:","");
         if (key.includes(";imgst;:")) {
+          console.log("Found image in: "+key);
           key = key.replace(";imgst;","");
           keyParts = key.split(";imgst;");
           key = '<img src="' + keyParts[0] + '" class="itemname-img" alt="CustomIcon">' + keyParts[1];
@@ -197,8 +199,10 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       li.classList.add("sb-item")
       // Icon handle
       if (key.includes("noicon:")) {
+        console.log("Found noicon in: "+key);
         key = key.replace("noicon:","");
         if (key.includes(";imgst;:")) {
+          console.log("Found image in: "+key);
           key = key.replace(";imgst;","");
           keyParts = key.split(";imgst;");
           key = '<img src="' + keyParts[0] + '" class="itemname-img" alt="CustomIcon">' + keyParts[1];
@@ -274,8 +278,10 @@ function addElemForPage(urlParams,parent) {
   li.classList.add("sb-item")
   // Icon handle
   if (key.includes("noicon:")) {
+    console.log("Found noicon in: "+key);
     key = key.replace("noicon:","");
     if (key.includes(";imgst;:")) {
+      console.log("Found imgst in: "+key);
       key = key.replace(";imgst;","");
       keyParts = key.split(";imgst;");
       key = '<img src="' + keyParts[0] + '" class="itemname-img" alt="CustomIcon">' + keyParts[1];
@@ -291,6 +297,7 @@ function addElemForPage(urlParams,parent) {
     a.target = '_blank';
   }
   // Add with link
+  a.href = value;
   li.appendChild(a);
   ul.appendChild(li);
 }
