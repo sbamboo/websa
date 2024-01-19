@@ -125,7 +125,7 @@ if (markdownUrl) {
 //Sidebar code
 function toggleUlFromButtom(id) {
   var btn = document.getElementById(id);
-  var ul = document.getElementById("parent@"+id);
+  var ul = document.getElementById("parent@"+id);)
   if (ul.classList.contains('collapsed')) {
     ul.classList.remove('collapsed');
     ul.classList.add('expanded');
@@ -139,6 +139,7 @@ function toggleUlFromButtom(id) {
 function buildFileTree(jsonData, parent, depth, parentId, preClass) {
   console.log(preClass);
   var ul = document.createElement('ul'); // Create parent ul
+  ul.classList.add("no-list-style");
   parent.appendChild(ul);
   if (parentId != "") {
     ul.id = "parent@" + parentId
@@ -178,6 +179,7 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       // Create
       var li = document.createElement('li');
       var a = document.createElement('a');
+      a.classList.add("no-text-decoration");
       a.id = "a;item;" + String(depth) + ";" + String(ind);
       li.id = "li;item;" + String(depth) + ";" + String(ind);
       li.classList.add("sb-item")
@@ -221,6 +223,7 @@ function getFirstH1Text(element, fallback = "page") {
 
 function addElemForPage(parent) {
   var ul = document.createElement('ul'); // Create parent ul
+  ul.classList.add("no-list-style");
   parent.appendChild(ul);
   // Get key & value
   var content = document.getElementById('markdown-content');
@@ -229,6 +232,7 @@ function addElemForPage(parent) {
   // Generate
   var li = document.createElement('li');
   var a = document.createElement('a');
+  a.classList.add("no-text-decoration");
   a.id = "a;item;0;0";
   li.id = "li;item;0;0";
   li.classList.add("sb-item")

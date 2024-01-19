@@ -37,17 +37,17 @@
     }
 }
 
-ul {
+.flex-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.no-list-style {
     list-style: none;
 }
 
-a {
+.no-text-decoration {
     text-decoration: none;
-}
-
-body {
-    display: flex;
-    flex-direction: row;
 }
 
 #markdown-content {
