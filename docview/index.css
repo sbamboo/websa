@@ -168,3 +168,12 @@ body {
 .infotx:active p a {
     color: var(--sb-addinf-color-active);
 }
+.infotx a {
+    color: var(--sb-addinf-color);
+}
+.infotx:hover a {
+    color: var(--sb-addinf-color-hover);
+}
+.infotx:active a {
+    color: var(--sb-addinf-color-active);
+}
