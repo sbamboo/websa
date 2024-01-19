@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+:root {
+    --sidebar-width: 15vw;
+}
+
 @media screen and (prefers-color-scheme: light) {
     :root {
         --sidebar-background: #f3f3f3;
@@ -37,7 +41,8 @@ body {
 }
 
 #markdown-content {
-    width: 75vw;
+    width: calc( 100vw - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
 }
 
 #sidebar {
@@ -46,7 +51,7 @@ body {
     left: 0;
     bottom: 0;
     height: auto;
-    width: 15vw;
+    width: var(--sidebar-width);
     background-color: var(--sidebar-background);
     overflow: hidden;
 }
