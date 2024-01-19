@@ -24,6 +24,9 @@ function localRedirect(urlObj,where) {
   if (parts[0] == "") {
     parts.shift()
   }
+  if (urlObj.origin.slice(-1) != "/") {
+    urlObj.origin += "/"
+  }
   return urlObj.origin + parts.join("/");
 }
 if (urlParams.has("css")) {} else {

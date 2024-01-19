@@ -1,8 +1,8 @@
 {
     "Documents":{
        "DocViewer": {
-         "Readme": "https://raw.githubusercontent.com/sbamboo/websa/main/docview/readme.md",
-         "Todo": "https://raw.githubusercontent.com/sbamboo/websa/main/docview/todo.md"
+         "Readme": "https://sbamboo.github.io/websa/docview/?markdown=https://sbamboo.github.io/websa/docview/readme.md&css=https://sbamboo.github.io/websa/docview/styles/standardauto.css&json=https://sbamboo.github.io/websa/docview/files.json",
+         "Todo": "https://sbamboo.github.io/websa/docview/?markdown=https://sbamboo.github.io/websa/docview/todo.md&css=https://sbamboo.github.io/websa/docview/styles/standardauto.css&json=https://sbamboo.github.io/websa/docview/files.json"
        }
     }
   }
