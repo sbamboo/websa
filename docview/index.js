@@ -164,7 +164,19 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       } else {
         prefix = expanded_prefix
       }
-      button.innerHTML = prefix+'<p id="folderTxt"> 📁'+key+'</p>';
+      // Icon handle
+      if (key.includes("noicon:")) {
+        key = key.replace("noicon:","");
+        if (key.includes(";imgst;:")) {
+          key = key.replace(";imgst;","");
+          keyParts = key.split(";imgst;");
+          key = '<img src="' + keyParts[0] + '" class="itemname-img" alt="CustomIcon">' + keyParts[1];
+        }
+      } else {
+        key = "📁"+key;
+      }
+      // Add content
+      button.innerHTML = prefix+'<p id="folderTxt"> '+key+'</p>';
       button.onclick = toggleUlFromButtom.bind(null, button.id);
       button.classList.add("collapseButton");
       button.classList.add("sb-item")
@@ -183,8 +195,19 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       a.id = "a;item;" + String(depth) + ";" + String(ind);
       li.id = "li;item;" + String(depth) + ";" + String(ind);
       li.classList.add("sb-item")
+      // Icon handle
+      if (key.includes("noicon:")) {
+        key = key.replace("noicon:","");
+        if (key.includes(";imgst;:")) {
+          key = key.replace(";imgst;","");
+          keyParts = key.split(";imgst;");
+          key = '<img src="' + keyParts[0] + '" class="itemname-img" alt="CustomIcon">' + keyParts[1];
+        }
+      } else {
+        key = "📄"+key;
+      }
       // Add content
-      a.innerHTML = '<p id="itemTxt"> 📄'+key+'</p>';
+      a.innerHTML = '<p id="itemTxt"> '+key+'</p>';
       // Handle noNewWindow
       if (value.includes("_blank:")) {
         value = value.replace("_blank:","")
@@ -249,8 +272,19 @@ function addElemForPage(urlParams,parent) {
   a.id = "a;item;0;0";
   li.id = "li;item;0;0";
   li.classList.add("sb-item")
+  // Icon handle
+  if (key.includes("noicon:")) {
+    key = key.replace("noicon:","");
+    if (key.includes(";imgst;:")) {
+      key = key.replace(";imgst;","");
+      keyParts = key.split(";imgst;");
+      key = '<img src="' + keyParts[0] + '" class="itemname-img" alt="CustomIcon">' + keyParts[1];
+    }
+  } else {
+    key = "📄"+key;
+  }
   // Add content
-  a.innerHTML = '<p id="itemTxt"> 📄'+key+'</p>';
+  a.innerHTML = '<p id="itemTxt"> '+key+'</p>';
   // Add with link
   a.href = value;
   li.appendChild(a);
