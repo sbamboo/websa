@@ -177,14 +177,6 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       } else {
         key = "📁"+key;
       }
-      // Handle collapse/expanded tags
-      if (key.includes("collapsed:")) {
-        key = key.replace("collapsed:","");
-        button.classList.add("collapsed");
-      } else if (key.includes("expanded:")) {
-        key = key.replace("expanded:","");
-        button.classList.add("expanded");
-      }
       // Add content
       button.innerHTML = prefix+'<p id="folderTxt"> '+key+'</p>';
       button.onclick = toggleUlFromButtom.bind(null, button.id);
