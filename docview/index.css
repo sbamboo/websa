@@ -5,6 +5,7 @@
 
 :root {
     --sidebar-width: 15vw;
+    --sidebar-font-size: 18px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -89,7 +90,7 @@
 
 #folderPref {
     color: var(--collapse-arrow-color);
-    font-size: 18px !important;
+    font-size: var(--sidebar-font-size) !important;
     font-weight: 100;
     transform: scaleX(1.5);
     margin-left: 5px;
@@ -176,4 +177,11 @@
     border-bottom: 2px solid var(--sb-divider-color);
     font-size: 30px;
     padding-bottom: 10px;
+}
+
+.itemname-img {
+    width: var(--sidebar-font-size);
+    height: var(--sidebar-font-size);
+    padding-right: 5px;
+    border-radius: 2px;
 }

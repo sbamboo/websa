@@ -168,10 +168,10 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       if (key.includes("noicon:")) {
         console.log("Found noicon in: "+key);
         key = key.replace("noicon:","");
-        if (key.includes(";imgst;:")) {
+        if (key.includes(";imgst;")) {
           console.log("Found image in: "+key);
           key = key.replace(";imgst;","");
-          keyParts = key.split(";imgst;");
+          keyParts = key.split(";imgen;");
           key = '<img src="' + keyParts[0] + '" class="itemname-img" alt="CustomIcon">' + keyParts[1];
         }
       } else {
@@ -182,7 +182,6 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       button.onclick = toggleUlFromButtom.bind(null, button.id);
       button.classList.add("collapseButton");
       button.classList.add("sb-item")
-      console.log(button.onclick);
       // Add
       li.appendChild(button);
       ul.appendChild(li);
@@ -201,10 +200,10 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       if (key.includes("noicon:")) {
         console.log("Found noicon in: "+key);
         key = key.replace("noicon:","");
-        if (key.includes(";imgst;:")) {
+        if (key.includes(";imgst;")) {
           console.log("Found image in: "+key);
           key = key.replace(";imgst;","");
-          keyParts = key.split(";imgst;");
+          keyParts = key.split(";imgen;");
           key = '<img src="' + keyParts[0] + '" class="itemname-img" alt="CustomIcon">' + keyParts[1];
         }
       } else {
@@ -280,10 +279,10 @@ function addElemForPage(urlParams,parent) {
   if (key.includes("noicon:")) {
     console.log("Found noicon in: "+key);
     key = key.replace("noicon:","");
-    if (key.includes(";imgst;:")) {
+    if (key.includes(";imgst;")) {
       console.log("Found imgst in: "+key);
       key = key.replace(";imgst;","");
-      keyParts = key.split(";imgst;");
+      keyParts = key.split(";imgen;");
       key = '<img src="' + keyParts[0] + '" class="itemname-img" alt="CustomIcon">' + keyParts[1];
     }
   } else {

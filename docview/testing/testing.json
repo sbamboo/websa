@@ -2,10 +2,17 @@
     "Testing Sites":{
       "Source": "https://github.com/sbamboo/websa/tree/main/docview",
       "Socials": {
-        "noicon:;imgst;https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png;imgen;Instagram": "_blank:https://instagram.com/"
+        "noicon:;imgst;https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png?20220706172052;imgen;Youtube": "_blank:https://youtube.com/",
+        "noicon:;imgst;https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png;imgen;Instagram": "_blank:https://instagram.com/",
+        "noicon:;imgst;https://img.freepik.com/premium-vector/tik-tok-logo_578229-290.jpg;imgen;Tiktok": "_blank:https://tiktok.com/",
+        "noicon:;imgst;https://1000logos.net/wp-content/uploads/2017/08/Snapchat-logo.jpg;imgen;Snapchat": "_blank:https://snapchat.com/"
       },
       "Testing Docs": {
         "test1":"https://sbamboo.github.io/websa/docview/?markdown=https://sbamboo.github.io/websa/docview/testing/test1.md&css=https://sbamboo.github.io/websa/docview/styles/standardauto.css&json=https://sbamboo.github.io/websa/docview/testing/testing.json"
+      },
+      "Docs from here": {
+        "Readme": "https://sbamboo.github.io/websa/docview/?markdown=https://sbamboo.github.io/websa/docview/readme.md&css=https://sbamboo.github.io/websa/docview/styles/standardauto.css&json=https://sbamboo.github.io/websa/docview/files.json",
+        "Todo": "https://sbamboo.github.io/websa/docview/?markdown=https://sbamboo.github.io/websa/docview/todo.md&css=https://sbamboo.github.io/websa/docview/styles/standardauto.css&json=https://sbamboo.github.io/websa/docview/files.json"
       }
     }
   }
