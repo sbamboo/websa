@@ -141,6 +141,11 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass, preTempClass
   var ul = document.createElement('ul'); // Create parent ul
   ul.classList.add("no-list-style");
   parent.appendChild(ul);
+  // Overwrite pretempclass if alExpand is set
+  if (preTempClass != null && urlParams.has("alExpand")) {
+    preTempClass = null;
+  }
+  // handle class
   if (parentId != "") {
     ul.id = "parent@" + parentId;
     if (preTempClass != null) {
