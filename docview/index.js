@@ -185,9 +185,13 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       li.classList.add("sb-item")
       // Add content
       a.innerHTML = '<p id="itemTxt"> 📄'+key+'</p>';
+      // Handle noNewWindow
+      if (value.includes("_blank:")) {
+        value = value.replace("_blank:","")
+        a.target = '_blank';
+      }
       // Add with link
       a.href = value;
-      a.target = '_blank';
       li.appendChild(a);
       ul.appendChild(li);
     }
