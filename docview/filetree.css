@@ -31,13 +31,18 @@ a {
     text-decoration: none;
 }
 
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+#markdown-content {
+    width: 75vw;
+}
+
 #sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
     height: auto;
-    width: 13vw;
+    width: 15vw;
     background-color: var(--sidebar-background);
     overflow: hidden;
 }
