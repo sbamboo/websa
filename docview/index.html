@@ -20,6 +20,13 @@
       const jsonUrl = urlParams.get('json')
       const markdownUrl = urlParams.get('markdown');
       const cssUrl = urlParams.get('css');
+      var defState = "expanded";
+      var expanded_prefix = '<p id="folderPref">˄</p>';
+      var collapsed_prefix = '<p id="folderPref">˅</p>';
+
+      if (urlParams.has('defState')) {
+        defState = urlParams.get('defState');
+      }
 
       //Markdown & CSS code
       function processMarkdown(data) {
@@ -60,44 +67,71 @@
         xhr.send();
       }
       //Start of Sidebar code
-      function buildFileTree(jsonData, parent) {
-        var ul = document.createElement('ul');
+      function toggleUlFromButtom(id) {
+        var btn = document.getElementById(id);
+        var ul = document.getElementById("parent@"+id);
+        if (ul.classList.contains('collapsed')) {
+          ul.classList.remove('collapsed');
+          ul.classList.add('expanded');
+          btn.innerHTML = btn.innerHTML.replace(collapsed_prefix,expanded_prefix)
+        } else if (ul.classList.contains('expanded')) {
+          ul.classList.remove('expanded');
+          ul.classList.add('collapsed');
+          btn.innerHTML = btn.innerHTML.replace(expanded_prefix,collapsed_prefix)
+        }
+      }
+      function buildFileTree(jsonData, parent, depth, parentId, preClass) {
+        console.log(preClass);
+        var ul = document.createElement('ul'); // Create parent ul
         parent.appendChild(ul);
+        if (parentId != "") {
+          ul.id = "parent@" + parentId
+          ul.classList.add(preClass)
+        }
 
+        var ind = 0;
         for (var key in jsonData) {
+          ind += 1;
           var value = jsonData[key];
-
           if (typeof value === 'object') {
-            // Folder
-            var li = document.createElement('li');
-            var a = document.createElement('a');
-            a.textContent = "📁"+key;
-            li.appendChild(a);
+            msg = "object at depth: " + depth + ", id: " + String(ind)
+            console.log(msg,key,value);
+            // Create
+            var li = document.createElement('li'); // Folder so create a ul
+            var button = document.createElement('button'); // Add an element for our folder
+            button.id = "button;object;" + String(depth) + ";" + String(ind);
+            li.id = "li;object;" + String(depth) + ";" + String(ind);
+            // Add content
+            if (preClass == "collapsed") {
+              prefix = collapsed_prefix
+            } else {
+              prefix = expanded_prefix
+            }
+            button.innerHTML = prefix+'<p id="folderTxt"> 📁'+key+'</p>';
+            button.onclick = toggleUlFromButtom.bind(null, button.id);
+            button.classList.add("collapseButton");
+            button.classList.add("sb-item")
+            console.log(button.onclick);
+            // Add
+            li.appendChild(button);
             ul.appendChild(li);
-            buildFileTree(value, li);
+            buildFileTree(value,li,depth+1,button.id,preClass);
           } else {
-            // File
+            msg = "item at depth: " + depth + ", id: " + String(ind)
+            console.log(msg,key,value)
+            // Create
             var li = document.createElement('li');
             var a = document.createElement('a');
-            a.textContent = "📄"+key;
+            a.id = "a;item;" + String(depth) + ";" + String(ind);
+            li.id = "li;item;" + String(depth) + ";" + String(ind);
+            li.classList.add("sb-item")
+            // Add content
+            a.innerHTML = '<p id="itemTxt"> 📄'+key+'</p>';
+            // Add with link
             a.href = value;
             a.target = '_blank';
             li.appendChild(a);
             ul.appendChild(li);
-            
-            // Add click event listener to files to redirect to the URL
-            a.addEventListener('click', function(e) {
-              e.preventDefault();
-              window.location.href = this.href;
-            });
-          }
-          
-          // Add click event listener to folders to render the sidebar
-          if (typeof value === 'object') {
-            a.addEventListener('click', function(e) {
-              e.preventDefault();
-              renderSidebar(value);
-            });
           }
         }
       }
@@ -110,7 +144,7 @@
           if (xhr.readyState === 4 && xhr.status === 200) {
             var jsonData = JSON.parse(xhr.responseText);
             var sidebar = document.getElementById('sidebar');
-            buildFileTree(jsonData, sidebar.querySelector('#filetree'));
+            buildFileTree(jsonData, sidebar.querySelector('#filetree'), 0, "", defState);
           }
         };
 
@@ -124,7 +158,19 @@
         x.style.left = "220px";
       } else {
         var x = document.getElementById("sidebar");
-        x.remove()
+        if (urlParams.has('jsonRaw')) {
+          var jsonrawValue = urlParams.get('jsonRaw');
+          try {
+            var jsonData = JSON.parse(jsonrawValue);
+            var sidebar = document.getElementById('sidebar');
+            buildFileTree(jsonData, sidebar.querySelector('#filetree'), 0, "", defState);
+          } catch (error) {
+            console.log(error);
+            x.remove()
+          }
+        } else {
+          x.remove()
+        }
       }
       //End of Sidebar code
     </script>
