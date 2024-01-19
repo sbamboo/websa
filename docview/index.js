@@ -9,24 +9,29 @@ var jsonUrl = urlParams.get('json')
 var infoMd   = document.getElementById("info-md");
 var infoCSS  = document.getElementById("info-css");
 var infoJSON = document.getElementById("info-json");
+var infoReadme = document.getElementById("info-readme");
+var infoTodo = document.getElementById("info-todo");
 
 var defState = "expanded";
 var expanded_prefix = '<p id="folderPref">˅</p>';
 var collapsed_prefix = '<p id="folderPref">˄</p>';
 
 // Css autofill
-if (urlParams.has("css")) {} else {
-  style = "standardauto";
-  if (urlParams.has("style")) {
-    style = styleP
-  }
-  parts = url.pathname.split("/");
+function localRedirect(urlObj,where) {
+  parts = urlObj.pathname.split("/");
   parts.pop();
-  parts.push("styles/"+ style + ".css");
+  parts.push(where);
   if (parts[0] == "") {
     parts.shift()
   }
-  cssUrl = url.origin + parts.join("/");
+  return urlObj.origin + parts.join("/");
+}
+if (urlParams.has("css")) {} else {
+  var style = "standardauto";
+  if (urlParams.has("style")) {
+    style = styleP
+  }
+  cssUrl = localRedirect(url,"styles/"+ style + ".css")
   console.log(cssUrl);
   urlParams.set("css",cssUrl);
 }
@@ -49,6 +54,13 @@ if (urlParams.has('json')) {
 } else if (urlParams.has('jsonRaw')) {
   infoJSON.innerHTML = '<p class="addinfo-data">JSON: RAW</p>'
 }
+
+// AdditionalInfo links
+var baseUrl = url.href.replace(url.search,"");
+var todoUrl = baseUrl.concat("?markdown=" + localRedirect(url,"todo.md") + "&css=" + localRedirect(url,"styles/standardauto.css") +"&json=" + localRedirect(url,"files.json"))
+var readmeUrl = baseUrl.concat("?markdown=" + localRedirect(url,"readme.md") + "&css=" + localRedirect(url,"styles/standardauto.css") +"&json=" + localRedirect(url,"files.json"))
+infoTodo.innerHTML = '<p>Readme: <a href="' + todoUrl + '">' + url.origin + '</a></p>'
+infoReadme.innerHTML = '<p>Dev Todo: <a href="' + readmeUrl + '">' + url.origin + '</a></p>'
 
 // AdditionalInfo toggle code
 var addinfo = document.getElementById("addinfo-toggle");
