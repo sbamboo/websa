@@ -24,11 +24,12 @@ function localRedirect(urlObj,where) {
   if (parts[0] == "") {
     parts.shift()
   }
-  if (urlObj.origin.slice(-1) != "/") {
-    urlObj.origin += "/"
+  var origin = urlObj.origin;
+  if (origin.slice(-1) == "/") {} else {
+    origin = origin + "/"
   }
-  console.log(urlObj.origin,parts);
-  return urlObj.origin + parts.join("/");
+  console.log(origin,parts);
+  return origin + parts.join("/");
 }
 if (urlParams.has("css")) {} else {
   var style = "standardauto";
