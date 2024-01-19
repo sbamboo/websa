@@ -28,7 +28,6 @@ function localRedirect(urlObj,where) {
   if (origin.slice(-1) == "/") {} else {
     origin = origin + "/"
   }
-  console.log(origin,parts);
   return origin + parts.join("/");
 }
 if (urlParams.has("css")) {} else {
@@ -36,8 +35,7 @@ if (urlParams.has("css")) {} else {
   if (urlParams.has("style")) {
     style = styleP
   }
-  cssUrl = localRedirect(url,"styles/"+ style + ".css")
-  console.log(cssUrl);
+  cssUrl = localRedirect(url,"styles/"+ style + ".css");
   urlParams.set("css",cssUrl);
 }
 
@@ -213,6 +211,35 @@ function loadFileTreeFromJson(jsonUrl) {
   xhr.send();
 }
 
+function getFirstH1Text(element, fallback = "page") {
+  // Use querySelector to find the first h1 element within the specified element
+  var firstH1 = element.querySelector('h1');
+
+  // Check if an h1 element was found
+  return firstH1 ? firstH1.textContent : fallback;
+}
+
+function addElemForPage(parent) {
+  var ul = document.createElement('ul'); // Create parent ul
+  parent.appendChild(ul);
+  // Get key & value
+  var content = document.getElementById('markdown-content');
+  var key = getFirstH1Text(content,"Current Page");
+  var value = window.location.href;
+  // Generate
+  var li = document.createElement('li');
+  var a = document.createElement('a');
+  a.id = "a;item;0;0";
+  li.id = "li;item;0;0";
+  li.classList.add("sb-item")
+  // Add content
+  a.innerHTML = '<p id="itemTxt"> 📄'+key+'</p>';
+  // Add with link
+  a.href = value;
+  li.appendChild(a);
+  ul.appendChild(li);
+}
+
 if (jsonUrl) {
   loadFileTreeFromJson(jsonUrl);
 } else {
@@ -225,5 +252,8 @@ if (jsonUrl) {
     } catch (error) {
       console.log(error);
     }
+  } else {
+    var sidebar = document.getElementById('sidebar');
+    addElemForPage(sidebar.querySelector('#filetree'));
   }
 }
