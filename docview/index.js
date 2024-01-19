@@ -142,8 +142,8 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
   ul.classList.add("no-list-style");
   parent.appendChild(ul);
   if (parentId != "") {
-    ul.id = "parent@" + parentId
-    ul.classList.add(preClass)
+    ul.id = "parent@" + parentId;
+    ul.classList.add(preClass);
   }
 
   var ind = 0;
@@ -176,6 +176,14 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
         }
       } else {
         key = "📁"+key;
+      }
+      // Handle collapse/expanded tags
+      if (key.includes("collapsed:")) {
+        key = key.replace("collapsed:","");
+        button.classList.add("collapsed");
+      } else if (key.includes("expanded:")) {
+        key = key.replace("expanded:","");
+        button.classList.add("expanded");
       }
       // Add content
       button.innerHTML = prefix+'<p id="folderTxt"> '+key+'</p>';
