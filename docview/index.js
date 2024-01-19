@@ -136,14 +136,19 @@ function toggleUlFromButtom(id) {
     btn.innerHTML = btn.innerHTML.replace(expanded_prefix,collapsed_prefix)
   }
 }
-function buildFileTree(jsonData, parent, depth, parentId, preClass) {
-  console.log(preClass);
+function buildFileTree(jsonData, parent, depth, parentId, preClass, preTempClass=null) {
+  console.log("building file tree: ",preClass,preTempClass);
   var ul = document.createElement('ul'); // Create parent ul
   ul.classList.add("no-list-style");
   parent.appendChild(ul);
   if (parentId != "") {
     ul.id = "parent@" + parentId;
-    ul.classList.add(preClass);
+    if (preTempClass != null) {
+      ul.classList.add(preTempClass);
+      preTempClass = null;
+    } else {
+      ul.classList.add(preClass);
+    }
   }
 
   var ind = 0;
@@ -152,7 +157,6 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
     var value = jsonData[key];
     if (typeof value === 'object') {
       msg = "object at depth: " + depth + ", id: " + String(ind)
-      console.log(msg,key,value);
       // Create
       var li = document.createElement('li'); // Folder so create a ul
       var button = document.createElement('button'); // Add an element for our folder
@@ -177,6 +181,16 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       } else {
         key = "📁"+key;
       }
+      // Handle collapse/expanded tags
+      if (key.includes("collapsed:")) {
+        key = key.replace("collapsed:","");
+        preTempClass = "collapsed";
+        print("Found " + preTempClass + " in: "+key);
+      } else if (key.includes("expanded:")) {
+        key = key.replace("expanded:","");
+        preTempClass = "expanded";
+        print("Found " + preTempClass + " in: "+key);
+      }
       // Add content
       button.innerHTML = prefix+'<p id="folderTxt"> '+key+'</p>';
       button.onclick = toggleUlFromButtom.bind(null, button.id);
@@ -185,10 +199,9 @@ function buildFileTree(jsonData, parent, depth, parentId, preClass) {
       // Add
       li.appendChild(button);
       ul.appendChild(li);
-      buildFileTree(value,li,depth+1,button.id,preClass);
+      buildFileTree(value,li,depth+1,button.id,preClass,preTempClass);
     } else {
       msg = "item at depth: " + depth + ", id: " + String(ind)
-      console.log(msg,key,value)
       // Create
       var li = document.createElement('li');
       var a = document.createElement('a');
@@ -232,7 +245,7 @@ function loadFileTreeFromJson(jsonUrl) {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var jsonData = JSON.parse(xhr.responseText);
       var sidebar = document.getElementById('sidebar');
-      buildFileTree(jsonData, sidebar.querySelector('#filetree'), 0, "", defState);
+      buildFileTree(jsonData, sidebar.querySelector('#filetree'), 0, "", defState, null);
     }
   };
 
@@ -309,7 +322,7 @@ if (jsonUrl) {
     try {
       var jsonData = JSON.parse(jsonrawValue);
       var sidebar = document.getElementById('sidebar');
-      buildFileTree(jsonData, sidebar.querySelector('#filetree'), 0, "", defState);
+      buildFileTree(jsonData, sidebar.querySelector('#filetree'), 0, "", defState,null);
     } catch (error) {
       console.log(error);
     }

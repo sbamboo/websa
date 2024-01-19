@@ -8,7 +8,7 @@
         "noicon:;imgst;https://1000logos.net/wp-content/uploads/2017/08/Snapchat-logo.jpg;imgen;Snapchat": "_blank:https://snapchat.com/"
       },
       "Testing Docs": {
-        "Examples": {
+        "collapsed:Examples": {
           "Readme":"https://sbamboo.github.io/websa/docview/?markdown=https://sbamboo.github.io/websa/docview/testing/examples/readme.md&css=https://sbamboo.github.io/websa/docview/styles/standardauto.css&json=https://sbamboo.github.io/websa/docview/testing/testing.json",
           "Headers":"https://sbamboo.github.io/websa/docview/?markdown=https://sbamboo.github.io/websa/docview/testing/examples/headers.md&css=https://sbamboo.github.io/websa/docview/styles/standardauto.css&json=https://sbamboo.github.io/websa/docview/testing/testing.json",
           "Emphasis":"https://sbamboo.github.io/websa/docview/?markdown=https://sbamboo.github.io/websa/docview/testing/examples/emphasis.md&css=https://sbamboo.github.io/websa/docview/styles/standardauto.css&json=https://sbamboo.github.io/websa/docview/testing/testing.json",
