@@ -144,7 +144,7 @@ function addEmptyPageInfo() {
   var div = document.createElement('div');
   wrapper.classList.add("no-loaded-page-info-wrapper");
   div.classList.add("no-loaded-page-info");
-  div.innerHTML = '<h2>No page loaded</h2><br><p>To view a markdown document on this page ad the <i>?markdown=</i> urlParameter with a link to the document.<br>Alternatively go to the "Additional Info" section in the sidebar and goto Todo or Readme.</p>';
+  div.innerHTML = '<h2>No page loaded</h2><br><p>To view a markdown document on this page ad the <i>?markdown=</i> urlParameter with a link to the document.<br>Alternatively go to the "Additional Info" section in the sidebar and goto Todo or Readme.<br><i>(Incase you have passed json and have a sidebar you can of course use that to view a page)</i></p>';
   wrapper.appendChild(div);
   content.appendChild(wrapper);
 }
