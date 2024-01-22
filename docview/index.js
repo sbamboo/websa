@@ -62,8 +62,8 @@ if (urlParams.has('json')) {
 var baseUrl = url.href.replace(url.search,"");
 var todoUrl = baseUrl.concat("?markdown=" + localRedirect(url,"todo.md") + "&css=" + localRedirect(url,"styles/standardauto.css") +"&json=" + localRedirect(url,"files.json"))
 var readmeUrl = baseUrl.concat("?markdown=" + localRedirect(url,"readme.md") + "&css=" + localRedirect(url,"styles/standardauto.css") +"&json=" + localRedirect(url,"files.json"))
-infoTodo.innerHTML = '<p>Readme: <a class="css-link" href="' + todoUrl + '">' + url.origin + '</a></p>'
-infoReadme.innerHTML = '<p>Dev Todo: <a class="css-link" href="' + readmeUrl + '">' + url.origin + '</a></p>'
+infoTodo.innerHTML = '<p>Dev Todo: <a class="css-link" href="' + todoUrl + '">' + url.origin + '</a></p>'
+infoReadme.innerHTML = '<p>Readme: <a class="css-link" href="' + readmeUrl + '">' + url.origin + '</a></p>'
 
 // AdditionalInfo toggle code
 var addinfo = document.getElementById("addinfo-toggle");
