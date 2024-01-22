@@ -63,7 +63,7 @@ if (urlParams.has('json')) {
 var baseUrl = url.href.replace(url.search,"");
 var todoUrl = baseUrl.concat("?markdown=" + localRedirect(url,"todo.md") + "&css=" + localRedirect(url,"styles/standardauto.css") +"&json=" + localRedirect(url,"files.json"))
 var readmeUrl = baseUrl.concat("?markdown=" + localRedirect(url,"readme.md") + "&css=" + localRedirect(url,"styles/standardauto.css") +"&json=" + localRedirect(url,"files.json"))
-var exampleUrl = baseUrl.concat("?css=" + localRedirect(url,"styles/standardauto.css") +"&json=" + localRedirect(url,"testing/examples/testing.json"))
+var exampleUrl = baseUrl.concat("?markdown=" + localRedirect(url,"testing/examples/readme.md") + "&css=" + localRedirect(url,"styles/standardauto.css") +"&json=" + localRedirect(url,"testing/testing.json"))
 infoTodo.innerHTML = '<p>Dev Todo: <a class="css-link" href="' + todoUrl + '">' + url.origin + '</a></p>'
 infoReadme.innerHTML = '<p>Readme: <a class="css-link" href="' + readmeUrl + '">' + url.origin + '</a></p>'
 infoExample.innerHTML = '<p>Example: <a class="css-link" href="' + exampleUrl + '">' + url.origin + '</a></p>'
