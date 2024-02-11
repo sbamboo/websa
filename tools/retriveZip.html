@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zip Archive Loader</title>
+    <!-- Include the JSZip library from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+</head>
+<body>
+    <!-- THIS FILE IS CREATED BY SIMON KALMI CLAESSON (Written with the help of ChatGPT) -->
+    <!-- JavaScript code to load and process the zip archive -->
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const mode = urlParams.get('mode');
+        const zipUrl = urlParams.get('url');
+        const sub = urlParams.get('sub');
+
+        // Define variables for the response
+        let response = {};
+
+        // Fetch the zip archive
+        fetch(zipUrl)
+            .then(response => response.blob())
+            .then(zipBlob => {
+                return JSZip.loadAsync(zipBlob);
+            })
+            .then(zip => {
+                if (mode === 'folderContent') {
+                    if (zip.folder(sub)) {
+                        const filesInFolder = Object.keys(zip.folder(sub).files);
+                        response.files = filesInFolder;
+                    } else {
+                        throw new Error('Folder not found in the zip archive');
+                    }
+                } else if (mode === 'fileContent') {
+                    if (zip.files[sub]) {
+                        return zip.files[sub].async('text');
+                    } else {
+                        throw new Error('File not found in the zip archive');
+                    }
+                } else {
+                    throw new Error('Invalid mode specified');
+                }
+            })
+            .then(content => {
+                if (mode === 'fileContent') {
+                    response.content = content;
+                }
+                console.log(response);
+            })
+            .catch(error => {
+                response.error = error.message;
+                console.error(response);
+            });
+    </script>
+</body>
+</html>
