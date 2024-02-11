@@ -30,6 +30,7 @@
                     if (zip.folder(sub)) {
                         const filesInFolder = Object.keys(zip.folder(sub).files);
                         response.files = filesInFolder;
+                        return filesInFolder.join('\n'); // Return the list of files as text
                     } else {
                         throw new Error('Folder not found in the zip archive');
                     }
@@ -46,12 +47,17 @@
             .then(content => {
                 if (mode === 'fileContent') {
                     response.content = content;
+                    return content; // Return the content as text
                 }
-                console.log(response);
+                return JSON.stringify(response); // Return the response as JSON
             })
             .catch(error => {
                 response.error = error.message;
-                console.error(response);
+                return JSON.stringify(response); // Return the error as JSON
+            })
+            .then(responseText => {
+                // Send the response back as text
+                document.body.innerText = responseText;
             });
     </script>
 </body>
