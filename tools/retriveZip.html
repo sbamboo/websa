@@ -8,6 +8,9 @@
 </head>
 <body>
     <!-- THIS FILE IS CREATED BY SIMON KALMI CLAESSON (Written with the help of ChatGPT) -->
+    <!-- Display area for the zip content -->
+    <div id="contentDisplay"></div>
+
     <!-- JavaScript code to load and process the zip archive -->
     <script>
         // Get URL parameters
@@ -19,13 +22,13 @@
         // Define variables for the response
         let response = {};
 
-        // Fetch the zip archive
-        fetch(zipUrl)
-            .then(response => response.blob())
-            .then(zipBlob => {
-                return JSZip.loadAsync(zipBlob);
-            })
-            .then(zip => {
+        // Fetch the zip archive synchronously
+        async function fetchZipContent() {
+            try {
+                const response = await fetch(zipUrl);
+                const zipBlob = await response.blob();
+                const zip = await JSZip.loadAsync(zipBlob);
+
                 if (mode === 'folderContent') {
                     if (zip.folder(sub)) {
                         const filesInFolder = Object.keys(zip.folder(sub).files);
@@ -36,29 +39,34 @@
                     }
                 } else if (mode === 'fileContent') {
                     if (zip.files[sub]) {
-                        return zip.files[sub].async('text');
+                        const content = await zip.files[sub].async('text');
+                        response.content = content;
+                        return content; // Return the content as text
                     } else {
                         throw new Error('File not found in the zip archive');
                     }
                 } else {
                     throw new Error('Invalid mode specified');
                 }
-            })
-            .then(content => {
-                if (mode === 'fileContent') {
-                    response.content = content;
-                    return content; // Return the content as text
-                }
-                return JSON.stringify(response); // Return the response as JSON
-            })
-            .catch(error => {
+            } catch (error) {
                 response.error = error.message;
-                return JSON.stringify(response); // Return the error as JSON
-            })
-            .then(responseText => {
-                // Send the response back as text
-                document.body.innerText = responseText;
-            });
+                throw error;
+            }
+        }
+
+        // Display the content on the page
+        async function displayContent() {
+            const contentDisplay = document.getElementById('contentDisplay');
+            try {
+                const content = await fetchZipContent();
+                contentDisplay.textContent = content;
+            } catch (error) {
+                contentDisplay.textContent = 'Error: ' + error.message;
+            }
+        }
+
+        // Load the content when the page is ready
+        displayContent();
     </script>
 </body>
 </html>
