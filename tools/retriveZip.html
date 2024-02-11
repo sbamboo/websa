@@ -2,71 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Zip Archive Loader</title>
+    <title>Zip Archive Loader API</title>
     <!-- Include the JSZip library from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 </head>
 <body>
-    <!-- THIS FILE IS CREATED BY SIMON KALMI CLAESSON (Written with the help of ChatGPT) -->
-    <!-- Display area for the zip content -->
-    <div id="contentDisplay"></div>
-
     <!-- JavaScript code to load and process the zip archive -->
     <script>
-        // Get URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const mode = urlParams.get('mode');
-        const zipUrl = urlParams.get('url');
-        const sub = urlParams.get('sub');
-
         // Define variables for the response
         let response = {};
 
-        // Fetch the zip archive synchronously
-        async function fetchZipContent() {
-            try {
-                const response = await fetch(zipUrl);
-                const zipBlob = await response.blob();
-                const zip = await JSZip.loadAsync(zipBlob);
-
-                if (mode === 'folderContent') {
-                    if (zip.folder(sub)) {
-                        const filesInFolder = Object.keys(zip.folder(sub).files);
-                        response.files = filesInFolder;
-                        return filesInFolder.join('\n'); // Return the list of files as text
+        // Fetch the zip archive based on URL parameters
+        function fetchZipArchive(mode, zipUrl, sub) {
+            return fetch(zipUrl)
+                .then(response => response.blob())
+                .then(zipBlob => {
+                    return JSZip.loadAsync(zipBlob);
+                })
+                .then(zip => {
+                    if (mode === 'folderContent') {
+                        if (zip.folder(sub)) {
+                            const filesInFolder = Object.keys(zip.folder(sub).files);
+                            response.files = filesInFolder;
+                            return filesInFolder;
+                        } else {
+                            throw new Error('Folder not found in the zip archive');
+                        }
+                    } else if (mode === 'fileContent') {
+                        if (zip.files[sub]) {
+                            return zip.files[sub].async('text');
+                        } else {
+                            throw new Error('File not found in the zip archive');
+                        }
                     } else {
-                        throw new Error('Folder not found in the zip archive');
+                        throw new Error('Invalid mode specified');
                     }
-                } else if (mode === 'fileContent') {
-                    if (zip.files[sub]) {
-                        const content = await zip.files[sub].async('text');
+                })
+                .then(content => {
+                    if (mode === 'fileContent') {
                         response.content = content;
-                        return content; // Return the content as text
-                    } else {
-                        throw new Error('File not found in the zip archive');
+                        return content;
                     }
-                } else {
-                    throw new Error('Invalid mode specified');
-                }
-            } catch (error) {
-                response.error = error.message;
-                throw error;
-            }
+                    return response;
+                })
+                .catch(error => {
+                    response.error = error.message;
+                    throw error;
+                });
         }
 
-        // Display the content on the page
-        async function displayContent() {
-            const contentDisplay = document.getElementById('contentDisplay');
+        // Handle incoming requests and send appropriate response
+        async function handleRequest() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mode = urlParams.get('mode');
+            const zipUrl = urlParams.get('url');
+            const sub = urlParams.get('sub');
+
             try {
-                const content = await fetchZipContent();
-                contentDisplay.textContent = content;
+                const result = await fetchZipArchive(mode, zipUrl, sub);
+                document.body.innerText = JSON.stringify(result);
             } catch (error) {
-                contentDisplay.textContent = 'Error: ' + error.message;
+                document.body.innerText = JSON.stringify({ error: error.message });
             }
         }
 
-        // Load the content when the page is ready
-        displayContent();
+        // Call the function to handle the request
+        handleRequest();
     </script>
 </body>
 </html>
