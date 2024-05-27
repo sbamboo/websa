@@ -111,6 +111,10 @@ body {
     margin-left: var(--indent);
 }
 
+.value {
+    overflow-wrap: break-word;
+}
+
 /* Obj */
 .obj > .collapsible {
     color: var(--collapsible-color);

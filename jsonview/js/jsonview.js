@@ -6,13 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const alternativeSymbols = urlParams.get('altsym') === 'true';
     const retUrl = decodeURIComponent(urlParams.get('return-url'));
     const retUrlSym = urlParams.get('return-sym');
+    let cutStringsAt = parseInt(urlParams.get('cut-strings-at'));
+    let cutLinksAt = parseInt(urlParams.get('cut-links-at'));
+    if (isNaN(cutStringsAt)) {
+        cutStringsAt = Infinity;
+    }
+    if (isNaN(cutLinksAt)) {
+        cutLinksAt = -Infinity;
+    }
 
     if (jsonUrl) {
         fetch(jsonUrl)
             .then(response => response.json())
             .then(data => {
                 const container = document.getElementById('jsonViewer');
-                displayJson(data, container, collapsedDefault, decorateExpanded, alternativeSymbols);
+                displayJson(data, container, collapsedDefault, decorateExpanded, alternativeSymbols, cutStringsAt, cutLinksAt);
             })
             .catch(error => {
                 console.error('Error fetching the JSON file:', error);
@@ -48,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     topbar.appendChild(returnContainer);
 });
 
-function displayJson(obj, parentElement, collapsedDefault, decorateExpanded, alternativeSymbols) {
+function displayJson(obj, parentElement, collapsedDefault, decorateExpanded, alternativeSymbols, cutStringsAt, cutLinksAt) {
     for (let key in obj) {
         if (obj.hasOwnProperty(key)) {
             const propertyDiv = document.createElement('div');
@@ -143,7 +151,7 @@ function displayJson(obj, parentElement, collapsedDefault, decorateExpanded, alt
                 } else {
                     collapsible.classList.add('expanded');
                 }
-                displayJson(obj[key], contentDiv, collapsedDefault, decorateExpanded, alternativeSymbols);
+                displayJson(obj[key], contentDiv, collapsedDefault, decorateExpanded, alternativeSymbols, cutStringsAt, cutLinksAt);
 
                 const placeholderSpan = document.createElement('span');
                 placeholderSpan.classList.add('placeholder');
@@ -194,13 +202,16 @@ function displayJson(obj, parentElement, collapsedDefault, decorateExpanded, alt
                 }
             } else {
                 collapsible.classList.add("indent");
-                const value = obj[key];
+                let value = obj[key];
                 let valueElement;
+                if (value.length > cutStringsAt) {
+                    value = value.substring(0, cutStringsAt)+"...";
+                }
                 if (propertyDiv.classList.contains('link')) {
                     valueElement = document.createElement('a');
                     valueElement.classList.add('value');
                     valueElement.href = value;
-                    valueElement.textContent = getDomainFromUrl(value);
+                    valueElement.textContent = getDomainFromUrl(value, cutLinksAt);
                     valueElement.target = '_blank';
                 } else {
                     valueElement = document.createElement('span');
@@ -322,12 +333,12 @@ function displayJson(obj, parentElement, collapsedDefault, decorateExpanded, alt
 }
 
 
-function getDomainFromUrl(url) {
+function getDomainFromUrl(url, cutLinksAt) {
     try {
         const urlObj = new URL(url);
         const path = urlObj.pathname;
         const isFile = path.includes('.') && !path.endsWith('/');
-        if (isFile) {
+        if (isFile && (window.innerWidth >= cutLinksAt || cutLinksAt < 0)) {
             let fileName = path.substring(path.lastIndexOf('/') + 1);
             const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
             if (fileName.length > 20) {
