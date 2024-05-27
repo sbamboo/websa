@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const jsonUrl = urlParams.get('url');
+    const jsonUrl = decodeURIComponent(urlParams.get('url'));
     const collapsedDefault = urlParams.get('collapsed') === 'true';
     const decorateExpanded = urlParams.get('decorate-expanded') === 'true';
     const alternativeSymbols = urlParams.get('altsym') === 'true';
-    const retUrl = urlParams.get('return-url');
+    const retUrl = decodeURIComponent(urlParams.get('return-url'));
     const retUrlSym = urlParams.get('return-sym');
 
     if (jsonUrl) {
@@ -21,29 +21,31 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('No URL parameter provided.');
     }
 
+    const topbar = document.getElementById("topbar");
+    const returnContainer = document.createElement("div");
+    const returnBtn = document.createElement("a");
+    returnContainer.classList.add("returnbtn-wrapper");
+    returnBtn.classList.add("returnbtn");
     if (retUrl) {
-        const topbar = document.getElementById("topbar");
-        const returnContainer = document.createElement("div");
-        const returnBtn = document.createElement("a");
-        returnContainer.classList.add("returnbtn-wrapper");
-        returnBtn.classList.add("returnbtn");
         returnBtn.href = retUrl;
-        if (retUrlSym) {
-            returnBtn.innerText = retUrlSym;
-        } else {
-            if (alternativeSymbols === true) {
-                returnBtn.innerText = "⟪";
-                returnBtn.style.paddingLeft = "10px";
-                returnBtn.style.paddingRight = "11px";
-                returnBtn.style.paddingTop = "3px";
-            } else {
-                returnBtn.innerText = "« Back";
-                returnBtn.style.fontSize = "16px"
-            }
-        }
-        returnContainer.appendChild(returnBtn);
-        topbar.appendChild(returnContainer);
+    } else if (retUrl === "history-back") {
+        returnBtn.onclick = () => { window.history.back(); };
     }
+    if (retUrlSym) {
+        returnBtn.innerText = retUrlSym;
+    } else {
+        if (alternativeSymbols === true) {
+            returnBtn.innerText = "⟪";
+            returnBtn.style.paddingLeft = "10px";
+            returnBtn.style.paddingRight = "11px";
+            returnBtn.style.paddingTop = "3px";
+        } else {
+            returnBtn.innerText = "« Back";
+            returnBtn.style.fontSize = "16px"
+        }
+    }
+    returnContainer.appendChild(returnBtn);
+    topbar.appendChild(returnContainer);
 });
 
 function displayJson(obj, parentElement, collapsedDefault, decorateExpanded, alternativeSymbols) {
