@@ -126,6 +126,12 @@ body {
     color: rgb(192, 49, 49);
 }
 
+#open-json-url-input {
+    width: 25vw;
+    min-width: 280px;
+    margin-right: 5px;
+}
+
 /* Obj */
 .obj > .collapsible {
     color: var(--collapsible-color);

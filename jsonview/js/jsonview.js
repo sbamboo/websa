@@ -1,3 +1,17 @@
+function updateUrlParameter(url, paramName, paramValue) {
+    // Create a URL object
+    let urlObj = new URL(url);
+
+    // Get the search parameters
+    let params = urlObj.searchParams;
+
+    // Set the new value for the parameter (it will replace the existing one if it exists)
+    params.set(paramName, paramValue);
+
+    // Return the updated URL as a string
+    return urlObj.toString();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const jsonUrl = decodeURIComponent(urlParams.get('url'));
@@ -18,10 +32,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('jsonViewer');
 
     if (!jsonUrl || jsonUrl === null || jsonUrl === "null") {
-        const msg = document.createElement("h2");
+        const msg = document.createElement("h3");
         msg.classList.add("msg-info");
         msg.innerHTML = `No json-url provided add <i>?url=</i> followed by your url, in the site-url-params.`
         container.appendChild(msg);
+        const msg2 = document.createElement("p");
+        msg2.innerText = "If you want to open a json file enter its url bellow:"
+        msg2.classList.add("msg-info");
+        container.appendChild(msg2)
+        const wra = document.createElement("div");
+            const inp = document.createElement("input");
+            inp.placeholder = "url";
+            inp.id = "open-json-url-input";
+            const but = document.createElement("button");
+            but.innerText = "Open";
+            but.id = "open-json-url-button";
+            but.onclick = () => {
+                window.location = updateUrlParameter(window.location.href,"url",inp.value);
+            }
+            wra.appendChild(inp);
+            wra.appendChild(but);
+        container.appendChild(wra);
+
+
     } else {
         fetch(jsonUrl)
             .then(response => response.json())
@@ -29,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 displayJson(data, container, collapsedDefault, decorateExpanded, alternativeSymbols, cutStringsAt, cutLinksAt);
             })
             .catch(error => {
-                const msg = document.createElement("h2");
+                const msg = document.createElement("h3");
                 msg.classList.add("msg-error");
                 msg.innerHTML = `Error fetching the JSON file: <span class="msg-error-msg">${error}</span>`
                 container.appendChild(msg);
