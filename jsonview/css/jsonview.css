@@ -115,6 +115,17 @@ body {
     overflow-wrap: break-word;
 }
 
+.msg-info {
+    color: var(--basic-text);
+}
+
+.msg-error {
+    color: rgb(158, 46, 46);
+}
+.msg-error-msg {
+    color: rgb(192, 49, 49);
+}
+
 /* Obj */
 .obj > .collapsible {
     color: var(--collapsible-color);

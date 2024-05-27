@@ -14,19 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isNaN(cutLinksAt)) {
         cutLinksAt = -Infinity;
     }
+    
+    const container = document.getElementById('jsonViewer');
 
-    if (jsonUrl) {
+    if (!jsonUrl || jsonUrl === null || jsonUrl === "null") {
+        const msg = document.createElement("h2");
+        msg.classList.add("msg-info");
+        msg.innerHTML = `No json-url provided add <i>?url=</i> followed by your url, in the site-url-params.`
+        container.appendChild(msg);
+    } else {
         fetch(jsonUrl)
             .then(response => response.json())
             .then(data => {
-                const container = document.getElementById('jsonViewer');
                 displayJson(data, container, collapsedDefault, decorateExpanded, alternativeSymbols, cutStringsAt, cutLinksAt);
             })
             .catch(error => {
-                console.error('Error fetching the JSON file:', error);
+                const msg = document.createElement("h2");
+                msg.classList.add("msg-error");
+                msg.innerHTML = `Error fetching the JSON file: <span class="msg-error-msg">${error}</span>`
+                container.appendChild(msg);
             });
-    } else {
-        console.error('No URL parameter provided.');
     }
 
     const topbar = document.getElementById("topbar");
@@ -36,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     returnBtn.classList.add("returnbtn");
     if (retUrl === "history-back") {
         returnBtn.onclick = () => { window.history.back(); };
-    } else if (retUrl) {
+    } else if (retUrl && retUrl !== null && retUrl !== "null") {
         returnBtn.href = retUrl;
     }
     if (retUrlSym) {
