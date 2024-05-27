@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const returnBtn = document.createElement("a");
     returnContainer.classList.add("returnbtn-wrapper");
     returnBtn.classList.add("returnbtn");
-    if (retUrl) {
-        returnBtn.href = retUrl;
-    } else if (retUrl === "history-back") {
+    if (retUrl === "history-back") {
         returnBtn.onclick = () => { window.history.back(); };
+    } else if (retUrl) {
+        returnBtn.href = retUrl;
     }
     if (retUrlSym) {
         returnBtn.innerText = retUrlSym;
