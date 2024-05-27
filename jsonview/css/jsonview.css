@@ -1,4 +1,6 @@
 :root {
+    --collapsable-char-collapsed-alt2: ">";
+    --collapsable-char-expanded-alt2: "˅";
     --collapsable-char-collapsed-alt: "⟫";
     --collapsable-char-expanded-alt: "⟫";
     --collapsable-char-collapsed: "►";
@@ -78,6 +80,12 @@ body {
     transform: rotate(90deg);
     overflow: hidden;
     line-height: 90%;
+}
+.collapsed.altsym2::after {
+    content: var(--collapsable-char-collapsed-alt2);
+}
+.expanded.altsym2::after {
+    content: var(--collapsable-char-expanded-alt2);
 }
 
 .collapsed + .content {

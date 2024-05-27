@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const jsonUrl = decodeURIComponent(urlParams.get('url'));
     const collapsedDefault = urlParams.get('collapsed') === 'true';
     const decorateExpanded = urlParams.get('decorate-expanded') === 'true';
-    const alternativeSymbols = urlParams.get('altsym') === 'true';
+    const alternativeSymbols = urlParams.get('altsym');
     const retUrl = decodeURIComponent(urlParams.get('return-url'));
     const retUrlSym = urlParams.get('return-sym');
     let cutStringsAt = parseInt(urlParams.get('cut-strings-at'));
@@ -82,11 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (retUrlSym) {
         returnBtn.innerText = retUrlSym;
     } else {
-        if (alternativeSymbols === true) {
+        if (alternativeSymbols === 1 || alternativeSymbols === "1") {
             returnBtn.innerText = "⟪";
             returnBtn.style.paddingLeft = "10px";
             returnBtn.style.paddingRight = "11px";
             returnBtn.style.paddingTop = "3px";
+        } else if (alternativeSymbols === 2 || alternativeSymbols === "2") {
+            returnBtn.innerText = "« Back";
+            returnBtn.style.fontSize = "16px"
         } else {
             returnBtn.innerText = "« Back";
             returnBtn.style.fontSize = "16px"
@@ -179,8 +182,10 @@ function displayJson(obj, parentElement, collapsedDefault, decorateExpanded, alt
             let isSingleLine = false;
 
             const collapsible = document.createElement('span');
-            if (alternativeSymbols === true) {
+            if (alternativeSymbols === 1 || alternativeSymbols === "1") {
                 collapsible.classList.add("altsym");
+            } else if (alternativeSymbols === 2 || alternativeSymbols === "2") {
+                collapsible.classList.add("altsym2");
             }
             propertyDiv.insertBefore(collapsible, keySpan);
 
