@@ -13,7 +13,7 @@
         <script>
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            const id = urlParams.get('id')
+            var id = urlParams.get('id')
             const context = urlParams.get('context')
             var loadNoMatterContext = true;
 
@@ -58,6 +58,15 @@
                     "placeholder": "<idstr>"
                 }
             };
+                
+            // Redirects (Forcing)
+            redirects = {
+                "13": "3.13p1"
+            };
+
+            if (Object.keys(redirects).includes(id)) {
+                id = redirects[id];
+            }
 
             if (context != null && context != undefined && Object.keys(shorteners).includes(context)) {
                 data = shorteners[context];
