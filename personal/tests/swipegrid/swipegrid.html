@@ -89,7 +89,7 @@
         var layouts = {
             "home": {
                 "onScroll": (distance,layout)=>{
-                    value += deltaY;
+                    value += distance;
                     updateValueDisplay();
                 },
                 "gridbox_template": "%",
@@ -215,9 +215,8 @@
                 parent.appendChild(div)
                 layouts[layout]["gridboxes"][nid]["elem"] = div
             }
-            console.log(layouts[layout])
         }
-        generator("home",document.getElementById("grid-wrapper"));
+        generator(currentLayout,document.getElementById("grid-wrapper"));
 
         // Variables
         let value = 0;
@@ -241,7 +240,7 @@
             gridItems.forEach(item => {
                 const rect = item.getBoundingClientRect();
                 if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-                    for (var [nid, data] of Object.entries(layouts[layout]["gridboxes"])) {
+                    for (var [nid, data] of Object.entries(layouts[currentLayout]["gridboxes"])) {
                         if (data["elem"] == item) {
                             data["onClick"](item,nid,data["id"],currentLayout)
                             break
