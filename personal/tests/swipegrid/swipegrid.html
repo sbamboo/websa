@@ -17,18 +17,27 @@
             overflow: hidden; /* Prevent scrolling on desktop browsers */
         }
 
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
         .value-display {
-            margin-bottom: 20px; /* Space between value display and grid */
             font-size: 24px;
+            margin-right: 20px; /* Space between value display and slider */
+        }
+
+        .slider {
+            width: 500px; /* Slider width */
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(3, 90px); /* Default size, will be scaled */
-            grid-template-rows: repeat(5, 90px); /* Default size, will be scaled */
-            gap: 10px;
+            grid-template-columns: repeat(3, 80px); /* Smaller grid boxes */
+            grid-template-rows: repeat(5, 80px); /* Smaller grid boxes */
+            gap: 10px; /* Maintain the same distance between grid items */
             position: relative;
-            transition: transform 0.2s; /* Smooth scaling transition */
         }
 
         .grid-item {
@@ -38,9 +47,8 @@
             background-color: #f0f0f0;
             border: 1px solid #ddd;
             font-size: 20px;
-            width: 90px; /* Default size, will be scaled */
-            height: 90px; /* Default size, will be scaled */
-            transition: background-color 0.2s; /* Smooth color transition */
+            width: 80px; /* Adjust size */
+            height: 80px; /* Adjust size */
         }
 
         .event-overlay {
@@ -51,28 +59,14 @@
             height: 100%;
             background-color: transparent; /* Invisible overlay */
             z-index: 1; /* Ensure overlay is on top */
-            transition: transform 0.2s; /* Smooth scaling transition */
-        }
-
-        .sliders {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .slider-label {
-            margin-bottom: 5px;
-        }
-
-        .slider {
-            margin-bottom: 20px;
-            width: 300px;
         }
     </style>
 </head>
 <body>
-    <div class="value-display">Value: <span id="value">0</span></div>
+    <div class="header">
+        <div class="value-display">Value: <span id="value">0</span></div>
+        <input type="range" class="slider" min="0" max="500" value="0">
+    </div>
     <div class="grid-container">
         <div class="event-overlay"></div> <!-- Invisible overlay for event handling -->
         <div class="grid-item" data-index="0">1</div>
@@ -92,26 +86,19 @@
         <div class="grid-item" data-index="14">15</div>
     </div>
 
-    <div class="sliders">
-        <div class="slider-label">Scale:</div>
-        <input id="scale-slider" type="range" min="-50" max="50" value="0" class="slider">
-        <div class="slider-label">Unused Slider:</div>
-        <input id="unused-slider" type="range" min="0" max="100" value="0" class="slider">
-    </div>
-
     <script>
         // Variables
         let value = 0;
         const scrollThreshold = 100; // Minimum distance to count as a scroll
         const valueDisplay = document.getElementById("value");
+        const slider = document.querySelector(".slider");
         const overlay = document.querySelector(".event-overlay");
         const gridItems = document.querySelectorAll(".grid-item");
-        const scaleSlider = document.getElementById("scale-slider");
-        const gridContainer = document.querySelector(".grid-container");
 
         // Update the displayed value
         function updateValueDisplay() {
             valueDisplay.textContent = value;
+            slider.value = value; // Sync slider with the value
         }
 
         // Handle swipe by adjusting value
@@ -134,26 +121,6 @@
                 }
             });
         }
-
-        // Handle scale change
-        function handleScaleChange() {
-            const scaleValue = parseFloat(scaleSlider.value);
-            const scaleFactor = 1 + scaleValue / 100; // Convert -50 to 50 range to scale factor
-
-            gridContainer.style.transform = `scale(${scaleFactor})`;
-            overlay.style.transform = `scale(${scaleFactor})`;
-
-            // Update grid item size to match scaling
-            gridItems.forEach(item => {
-                item.style.width = `${90 * scaleFactor}px`;
-                item.style.height = `${90 * scaleFactor}px`;
-            });
-        }
-
-        // Initial setup
-        handleScaleChange(); // Set initial scale
-
-        scaleSlider.addEventListener('input', handleScaleChange); // Update scale on slider change
 
         let startY = 0;
         let isSwiping = false;
