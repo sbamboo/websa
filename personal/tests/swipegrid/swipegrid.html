@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swipe Demo</title>
+    <title>Swipe and Click Demo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -22,6 +22,7 @@
             grid-template-columns: repeat(3, 100px);
             grid-template-rows: repeat(5, 100px);
             gap: 10px;
+            position: relative;
         }
 
         .grid-item {
@@ -37,86 +38,96 @@
             margin-top: 20px;
             font-size: 24px;
         }
+
+        .event-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent; /* Invisible overlay */
+            z-index: 1; /* Ensure overlay is on top */
+        }
     </style>
 </head>
 <body>
     <div class="grid-container">
-        <div class="grid-item">1</div>
-        <div class="grid-item">2</div>
-        <div class="grid-item">3</div>
-        <div class="grid-item">4</div>
-        <div class="grid-item">5</div>
-        <div class="grid-item">6</div>
-        <div class="grid-item">7</div>
-        <div class="grid-item">8</div>
-        <div class="grid-item">9</div>
-        <div class="grid-item">10</div>
-        <div class="grid-item">11</div>
-        <div class="grid-item">12</div>
-        <div class="grid-item">13</div>
-        <div class="grid-item">14</div>
-        <div class="grid-item">15</div>
+        <div class="event-overlay"></div> <!-- Invisible overlay for event handling -->
+        <div class="grid-item" data-index="0">1</div>
+        <div class="grid-item" data-index="1">2</div>
+        <div class="grid-item" data-index="2">3</div>
+        <div class="grid-item" data-index="3">4</div>
+        <div class="grid-item" data-index="4">5</div>
+        <div class="grid-item" data-index="5">6</div>
+        <div class="grid-item" data-index="6">7</div>
+        <div class="grid-item" data-index="7">8</div>
+        <div class="grid-item" data-index="8">9</div>
+        <div class="grid-item" data-index="9">10</div>
+        <div class="grid-item" data-index="10">11</div>
+        <div class="grid-item" data-index="11">12</div>
+        <div class="grid-item" data-index="12">13</div>
+        <div class="grid-item" data-index="13">14</div>
+        <div class="grid-item" data-index="14">15</div>
     </div>
     <div class="value-display">Value: <span id="value">0</span></div>
-    
+
     <script>
         let value = 0;
         const valueDisplay = document.getElementById("value");
+        const overlay = document.querySelector(".event-overlay");
+        const gridItems = document.querySelectorAll(".grid-item");
 
         function updateValueDisplay() {
             valueDisplay.textContent = value;
         }
 
-        // Function to handle swipe detection
-        function detectSwipe(el, func) {
-            let swipeDet = {
-                sX: 0,
-                sY: 0,
-                eX: 0,
-                eY: 0
-            };
-
-            el.addEventListener('touchstart', function (e) {
-                let t = e.touches[0];
-                swipeDet.sX = t.screenX;
-                swipeDet.sY = t.screenY;
-            }, false);
-
-            el.addEventListener('touchmove', function (e) {
-                let t = e.touches[0];
-                swipeDet.eX = t.screenX;
-                swipeDet.eY = t.screenY;
-            }, false);
-
-            el.addEventListener('touchend', function (e) {
-                let deltaX = swipeDet.eX - swipeDet.sX;
-                let deltaY = swipeDet.eY - swipeDet.sY;
-
-                if (Math.abs(deltaX) < 20 && Math.abs(deltaY) > 50) {
-                    if (deltaY > 0) {
-                        func('down');
-                    } else {
-                        func('up');
-                    }
-                }
-            }, false);
+        function handleSwipe(deltaY) {
+            const normalizedDelta = deltaY / window.innerHeight;
+            value += Math.round(normalizedDelta * 10); // Adjust value by normalized swipe length
+            updateValueDisplay();
         }
 
-        detectSwipe(document.querySelector('.grid-container'), function (swipeDirection) {
-            if (swipeDirection === 'up') {
-                value++;
-            } else if (swipeDirection === 'down') {
-                value--;
-            }
-            updateValueDisplay();
-        });
+        function handleClick(x, y) {
+            gridItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                    item.style.backgroundColor = 'red'; // Set the clicked item's color to red
+                }
+            });
+        }
 
-        updateValueDisplay();
+        let startY = 0;
+        let isSwiping = false;
+
+        overlay.addEventListener('touchstart', function(e) {
+            startY = e.touches[0].clientY;
+            isSwiping = false;
+        }, false);
+
+        overlay.addEventListener('touchmove', function(e) {
+            const currentY = e.touches[0].clientY;
+            const deltaY = currentY - startY;
+
+            if (Math.abs(deltaY) > 5) { // Check if user is swiping
+                handleSwipe(deltaY);
+                startY = currentY; // Reset startY to allow continuous swipe detection
+                isSwiping = true;
+            }
+        }, false);
+
+        overlay.addEventListener('touchend', function(e) {
+            if (!isSwiping) { // If not swiping, it's a tap/click
+                const touch = e.changedTouches[0];
+                handleClick(touch.clientX, touch.clientY);
+            }
+        }, false);
 
         // Prevent default touchmove behavior to disable scrolling
         document.body.addEventListener('touchmove', function(e) {
             e.preventDefault();
         }, { passive: false });
+
+        updateValueDisplay();
     </script>
 </body>
 </html>
