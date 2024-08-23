@@ -63,12 +63,12 @@
 </head>
 <body>
     <div class="value-container">
-        <div class="value-display">Value: <span id="value">0</span></div>
-        <input type="text" class="text-input" value="0"> <!-- Editable text input -->
+        <div class="value-display">Value: <span id="value">100</span></div>
+        <input id="threshold-input" type="text" class="text-input" value="0"> <!-- Editable text input -->
     </div>
-    <div class="grid-container">
+    <div class="grid-container" id="grid-wrapper">
         <div class="event-overlay"></div> <!-- Invisible overlay for event handling -->
-        <div class="grid-item" data-index="0">1</div>
+        <!--<div class="grid-item" data-index="0">1</div>
         <div class="grid-item" data-index="1">2</div>
         <div class="grid-item" data-index="2">3</div>
         <div class="grid-item" data-index="3">4</div>
@@ -82,13 +82,146 @@
         <div class="grid-item" data-index="11">12</div>
         <div class="grid-item" data-index="12">13</div>
         <div class="grid-item" data-index="13">14</div>
-        <div class="grid-item" data-index="14">15</div>
+        <div class="grid-item" data-index="14">15</div>-->
     </div>
 
     <script>
+        var layouts = {
+            "home": {
+                "onScroll": (distance,layout)=>{
+                    value += deltaY;
+                    updateValueDisplay();
+                },
+                "gridbox_template": "%",
+                "gridboxes": {
+                    0: {
+                        "id": "power",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    1: {
+                        "id": "colour",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    2: {
+                        "id": "input",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    3: {
+                        "id": "num_1",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    4: {
+                        "id": "num_2",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    5: {
+                        "id": "num_3",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    6: {
+                        "id": "num_4",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    7: {
+                        "id": "num_5",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    8: {
+                        "id": "num_6",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    9: {
+                        "id": "num_7",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    10: {
+                        "id": "num_8",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    11: {
+                        "id": "num_9",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    12: {
+                        "id": "volume",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    13: {
+                        "id": "num_0",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    },
+                    14: {
+                        "id": "contrast",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null
+                    }
+                }
+            }
+        }
+        var currentLayout = "home";
+
+        // generator
+        function htmlStringToElement(htmlString) {
+            // Create a temporary container element
+            const container = document.createElement('div');
+            
+            // Set the HTML string as the innerHTML of the container
+            container.innerHTML = htmlString;
+            
+            // Extract and return the first child of the container
+            return container.firstChild;
+        }
+        function generator(layout,parent) {
+            parent.innerHTML = `<div class="event-overlay"></div>`;
+            for (var [nid, data] of Object.entries(layouts[layout]["gridboxes"])) {
+                nid = parseInt(nid)
+                layouts[layout]["gridboxes"][nid]["icon"] = htmlStringToElement(layouts[layout]["gridbox_template"].replace("%",`<p>${nid+1}</p>`))
+                layouts[layout]["gridboxes"][nid]["onClick"] = (elem,nid,id,layout)=>{
+                    alert(`Pressed ${nid+1}!`)
+                }
+                div = document.createElement("div")
+                div.classList.add("grid-item")
+                div.setAttribute('data-index', nid);
+                div.innerHTML = nid+1
+                parent.appendChild(div)
+                layouts[layout]["gridboxes"][nid]["elem"] = div
+            }
+            console.log(layouts[layout])
+        }
+        generator("home",document.getElementById("grid-wrapper"));
+
         // Variables
         let value = 0;
-        const scrollThreshold = 100; // Minimum distance to count as a scroll
+        const scrollThreshold = parseInt(document.getElementById("threshold-input").value); // Minimum distance to count as a scroll
         const valueDisplay = document.getElementById("value");
         const overlay = document.querySelector(".event-overlay");
         const gridItems = document.querySelectorAll(".grid-item");
@@ -100,8 +233,7 @@
 
         // Handle swipe by adjusting value
         function handleSwipe(deltaY) {
-            value -= deltaY; // Invert the effect of scrolling
-            updateValueDisplay();
+            layouts[currentLayout]["onScroll"](-deltaY,currentLayout) // Invert the scrolling
         }
 
         // Handle click by toggling grid item color
@@ -109,11 +241,11 @@
             gridItems.forEach(item => {
                 const rect = item.getBoundingClientRect();
                 if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-                    // Toggle color between red and original
-                    if (item.style.backgroundColor === 'red') {
-                        item.style.backgroundColor = '#f0f0f0';
-                    } else {
-                        item.style.backgroundColor = 'red';
+                    for (var [nid, data] of Object.entries(layouts[layout]["gridboxes"])) {
+                        if (data["elem"] == item) {
+                            data["onClick"](item,nid,data["id"],currentLayout)
+                            break
+                        }
                     }
                 }
             });
