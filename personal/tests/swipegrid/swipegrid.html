@@ -455,6 +455,40 @@
             generator(currentLayout,document.getElementById("grid-wrapper"));
             overlay = document.querySelector(".event-overlay");
             gridItems = document.querySelectorAll(".grid-item");
+            
+            // Touch start event to detect swipe or tap
+            overlay.addEventListener('touchstart', function(e) {
+                startY = e.touches[0].clientY;
+                isSwiping = false;
+            }, false);
+
+            // Touch move event to handle swiping
+            overlay.addEventListener('touchmove', function(e) {
+                const currentY = e.touches[0].clientY;
+                const deltaY = currentY - startY;
+
+                // Check if user is swiping with a threshold
+                if (Math.abs(deltaY) > parseInt(document.getElementById("threshold-input").value)) {
+                    handleSwipe(deltaY);
+                    console.log(`Called swipe for ${currentLayout}`)
+                    startY = currentY; // Reset startY to allow continuous swipe detection
+                    isSwiping = true;
+                }
+            }, false);
+
+            // Touch end event to handle tap or end of swipe
+            overlay.addEventListener('touchend', function(e) {
+                if (!isSwiping) { // If not swiping, it's a tap/click
+                    const touch = e.changedTouches[0];
+                    handleClick(touch.clientX, touch.clientY);
+                }
+            }, false);
+
+            // Prevent default touchmove behavior to disable scrolling
+            document.body.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+
             console.log("Reloaded ui!",overlay,gridItems)
         }
         reloadUi()
@@ -493,39 +527,6 @@
 
         let startY = 0;
         let isSwiping = false;
-
-        // Touch start event to detect swipe or tap
-        overlay.addEventListener('touchstart', function(e) {
-            startY = e.touches[0].clientY;
-            isSwiping = false;
-        }, false);
-
-        // Touch move event to handle swiping
-        overlay.addEventListener('touchmove', function(e) {
-            const currentY = e.touches[0].clientY;
-            const deltaY = currentY - startY;
-
-            // Check if user is swiping with a threshold
-            if (Math.abs(deltaY) > parseInt(document.getElementById("threshold-input").value)) {
-                handleSwipe(deltaY);
-                console.log(`Called swipe for ${currentLayout}`)
-                startY = currentY; // Reset startY to allow continuous swipe detection
-                isSwiping = true;
-            }
-        }, false);
-
-        // Touch end event to handle tap or end of swipe
-        overlay.addEventListener('touchend', function(e) {
-            if (!isSwiping) { // If not swiping, it's a tap/click
-                const touch = e.changedTouches[0];
-                handleClick(touch.clientX, touch.clientY);
-            }
-        }, false);
-
-        // Prevent default touchmove behavior to disable scrolling
-        document.body.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, { passive: false });
 
         updateValueDisplay();
     </script>
