@@ -206,7 +206,11 @@
                 nid = parseInt(nid)
                 layouts[layout]["gridboxes"][nid]["icon"] = htmlStringToElement(layouts[layout]["gridbox_template"].replace("%",`<p>${nid+1}</p>`))
                 layouts[layout]["gridboxes"][nid]["onClick"] = (elem,nid,id,layout)=>{
-                    alert(`Pressed ${nid+1}!`)
+                    if (elem.style.backgroundColor === 'red') {
+                        elem.style.backgroundColor = 'red';
+                    } else {
+                        elem.style.backgroundColor = 'red';
+                    }
                 }
                 div = document.createElement("div")
                 div.classList.add("grid-item")
