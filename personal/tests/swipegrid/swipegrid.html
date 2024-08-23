@@ -252,7 +252,7 @@
             },
             "volume": {
                 "onScroll": (distance,layout)=>{
-                    value += Math.round(distance/parseInt(document.getElementById("threshold-input").value));
+                    value += Math.round(distance/parseInt(document.getElementById("scroll-divider-input").value));
                     if (value > 100) {value = 100}
                     if (value < 0) {value = 0}
 
@@ -310,7 +310,7 @@
             },
             "color": {
                 "onScroll": (distance,layout)=>{
-                    value += Math.round(distance/parseInt(document.getElementById("threshold-input").value));
+                    value += Math.round(distance/parseInt(document.getElementById("scroll-divider-input").value));
                     if (value > 100) {value = 100}
                     if (value < 0) {value = 0}
 
@@ -368,7 +368,7 @@
             },
             "contrast": {
                 "onScroll": (distance,layout)=>{
-                    value += Math.round(distance/parseInt(document.getElementById("threshold-input").value));
+                    value += Math.round(distance/parseInt(document.getElementById("scroll-divider-input").value));
                     if (value > 100) {value = 100}
                     if (value < 0) {value = 0}
 
