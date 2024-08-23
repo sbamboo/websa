@@ -82,8 +82,7 @@
         }
 
         function handleSwipe(deltaY) {
-            const normalizedDelta = deltaY / window.innerHeight;
-            value += Math.round(normalizedDelta * 10); // Adjust value by normalized swipe length
+            value -= deltaY; // Invert the effect of scrolling
             updateValueDisplay();
         }
 
