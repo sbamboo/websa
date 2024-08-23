@@ -17,9 +17,12 @@
             overflow: hidden; /* Prevent scrolling on desktop browsers */
         }
 
-        .value-display {
+        .value-container {
             margin-bottom: 20px; /* Space between value display and grid */
             font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between value and input */
         }
 
         .grid-container {
@@ -50,10 +53,18 @@
             background-color: transparent; /* Invisible overlay */
             z-index: 1; /* Ensure overlay is on top */
         }
+
+        .text-input {
+            width: 4em; /* Four characters wide */
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div class="value-display">Value: <span id="value">0</span></div> <!-- Moved to the top -->
+    <div class="value-container">
+        <div class="value-display">Value: <span id="value">0</span></div>
+        <input type="text" class="text-input" value="0" readonly> <!-- Unused text input -->
+    </div>
     <div class="grid-container">
         <div class="event-overlay"></div> <!-- Invisible overlay for event handling -->
         <div class="grid-item" data-index="0">1</div>
