@@ -59,6 +59,11 @@
             text-align: center;
             font-size: 20px; /* Adjust font size for better visibility */
         }
+
+        .gridbox-icon {
+            width: 50%;
+            height: auto; 
+        }
     </style>
 </head>
 <body>
@@ -77,7 +82,11 @@
                 "gridboxes": {
                     0: {
                         "id": "power",
-                        "icon": "På",
+                        "icon": `
+                        <svg class="gridbox-icon" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.0001 2V12M18.3601 6.64C19.6185 7.89879 20.4754 9.50244 20.8224 11.2482C21.1694 12.9939 20.991 14.8034 20.3098 16.4478C19.6285 18.0921 18.4749 19.4976 16.9949 20.4864C15.515 21.4752 13.775 22.0029 11.9951 22.0029C10.2152 22.0029 8.47527 21.4752 6.99529 20.4864C5.51532 19.4976 4.36176 18.0921 3.68049 16.4478C2.99921 14.8034 2.82081 12.9939 3.16784 11.2482C3.51487 9.50244 4.37174 7.89879 5.63012 6.64" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        `,
                         "onClick": (elem,nid,id,layout)=>{
                             currentLayout="home"
                             reloadUi()
@@ -107,7 +116,11 @@
                 "gridboxes": {
                     0: {
                         "id": "power",
-                        "icon": "Av",
+                        "icon": `
+                        <svg class="gridbox-icon" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.0001 2V12M18.3601 6.64C19.6185 7.89879 20.4754 9.50244 20.8224 11.2482C21.1694 12.9939 20.991 14.8034 20.3098 16.4478C19.6285 18.0921 18.4749 19.4976 16.9949 20.4864C15.515 21.4752 13.775 22.0029 11.9951 22.0029C10.2152 22.0029 8.47527 21.4752 6.99529 20.4864C5.51532 19.4976 4.36176 18.0921 3.68049 16.4478C2.99921 14.8034 2.82081 12.9939 3.16784 11.2482C3.51487 9.50244 4.37174 7.89879 5.63012 6.64" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        `,
                         "onClick": (elem,nid,id,layout)=>{
                             currentLayout="off"
                             reloadUi()
@@ -117,7 +130,11 @@
                     },
                     1: {
                         "id": "volume",
-                        "icon": "Volym",
+                        "icon": `
+                        <svg class="gridbox-icon" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.7479 4.99993C21.1652 6.97016 22 9.38756 22 11.9999C22 14.6123 21.1652 17.0297 19.7479 18.9999M15.7453 7.99993C16.5362 9.13376 17 10.5127 17 11.9999C17 13.4872 16.5362 14.8661 15.7453 15.9999M9.63432 4.36561L6.46863 7.5313C6.29568 7.70425 6.2092 7.79073 6.10828 7.85257C6.01881 7.9074 5.92127 7.9478 5.81923 7.9723C5.70414 7.99993 5.58185 7.99993 5.33726 7.99993H3.6C3.03995 7.99993 2.75992 7.99993 2.54601 8.10892C2.35785 8.20479 2.20487 8.35777 2.10899 8.54594C2 8.75985 2 9.03987 2 9.59993V14.3999C2 14.96 2 15.24 2.10899 15.4539C2.20487 15.6421 2.35785 15.7951 2.54601 15.8909C2.75992 15.9999 3.03995 15.9999 3.6 15.9999H5.33726C5.58185 15.9999 5.70414 15.9999 5.81923 16.0276C5.92127 16.0521 6.01881 16.0925 6.10828 16.1473C6.2092 16.2091 6.29568 16.2956 6.46863 16.4686L9.63431 19.6342C10.0627 20.0626 10.2769 20.2768 10.4608 20.2913C10.6203 20.3038 10.7763 20.2392 10.8802 20.1175C11 19.9773 11 19.6744 11 19.0686V4.9313C11 4.32548 11 4.02257 10.8802 3.88231C10.7763 3.76061 10.6203 3.69602 10.4608 3.70858C10.2769 3.72305 10.0627 3.93724 9.63432 4.36561Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        `,
                         "onClick": (elem,nid,id,layout)=>{
                             currentLayout="volume"
                             reloadUi()
@@ -197,7 +214,11 @@
                     },
                     12: {
                         "id": "color",
-                        "icon": "Färg",
+                        "icon": `
+                        <svg class="gridbox-icon" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 20.4722C13.0615 21.4223 14.4633 22 16 22C19.3137 22 22 19.3137 22 16C22 13.2331 20.1271 10.9036 17.5798 10.2102M6.42018 10.2102C3.87293 10.9036 2 13.2331 2 16C2 19.3137 4.68629 22 8 22C11.3137 22 14 19.3137 14 16C14 15.2195 13.851 14.4738 13.5798 13.7898M18 8C18 11.3137 15.3137 14 12 14C8.68629 14 6 11.3137 6 8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        `,
                         "onClick": (elem,nid,id,layout)=>{
                             currentLayout="color"
                             reloadUi()
@@ -214,7 +235,12 @@
                     },
                     14: {
                         "id": "contrast",
-                        "icon": "Kontrast",
+                        "icon": `
+                        <svg class="gridbox-icon" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5V18.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        `,
                         "onClick": (elem,nid,id,layout)=>{
                             currentLayout="contrast"
                             reloadUi()
@@ -226,7 +252,7 @@
             },
             "volume": {
                 "onScroll": (distance,layout)=>{
-                    value += Math.round(distance/4);
+                    value += Math.round(distance/parseInt(document.getElementById("threshold-input").value));
                     if (value > 100) {value = 100}
                     if (value < 0) {value = 0}
 
@@ -236,7 +262,11 @@
                 "gridboxes": {
                     0: {
                         "id": "back",
-                        "icon": "Tillbaka",
+                        "icon": `
+                        <svg class="gridbox-icon" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 16L16 12M16 12L12 8M16 12H8M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        `,
                         "onClick": (elem,nid,id,layout)=>{
                             currentLayout="home"
                             reloadUi()
@@ -280,7 +310,7 @@
             },
             "color": {
                 "onScroll": (distance,layout)=>{
-                    value += Math.round(distance/4);
+                    value += Math.round(distance/parseInt(document.getElementById("threshold-input").value));
                     if (value > 100) {value = 100}
                     if (value < 0) {value = 0}
 
@@ -290,7 +320,11 @@
                 "gridboxes": {
                     0: {
                         "id": "back",
-                        "icon": "Tillbaka",
+                        "icon": `
+                        <svg class="gridbox-icon" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 16L16 12M16 12L12 8M16 12H8M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        `,
                         "onClick": (elem,nid,id,layout)=>{
                             currentLayout="home"
                             reloadUi()
@@ -334,7 +368,7 @@
             },
             "contrast": {
                 "onScroll": (distance,layout)=>{
-                    value += Math.round(distance/4);
+                    value += Math.round(distance/parseInt(document.getElementById("threshold-input").value));
                     if (value > 100) {value = 100}
                     if (value < 0) {value = 0}
 
@@ -344,7 +378,11 @@
                 "gridboxes": {
                     0: {
                         "id": "back",
-                        "icon": "Tillbaka",
+                        "icon": `
+                        <svg class="gridbox-icon" width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 16L16 12M16 12L12 8M16 12H8M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        `,
                         "onClick": (elem,nid,id,layout)=>{
                             currentLayout="home"
                             reloadUi()
