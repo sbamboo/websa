@@ -42,6 +42,7 @@
             font-size: 20px;
             width: 90px; /* Adjust size */
             height: 90px; /* Adjust size */
+            transition: background-color 0.3s; /* Smooth color transition */
         }
 
         .event-overlay {
@@ -59,6 +60,10 @@
             text-align: center;
             font-size: 20px; /* Adjust font size for better visibility */
         }
+
+        .icon {
+            font-size: 16px; /* Font size for icons */
+        }
     </style>
 </head>
 <body>
@@ -66,23 +71,8 @@
         <div class="value-display">Value: <span id="value">0</span></div>
         <input type="text" class="text-input" value="0"> <!-- Editable text input -->
     </div>
-    <div class="grid-container">
+    <div class="grid-container" id="grid-container">
         <div class="event-overlay"></div> <!-- Invisible overlay for event handling -->
-        <div class="grid-item" data-index="0">1</div>
-        <div class="grid-item" data-index="1">2</div>
-        <div class="grid-item" data-index="2">3</div>
-        <div class="grid-item" data-index="3">4</div>
-        <div class="grid-item" data-index="4">5</div>
-        <div class="grid-item" data-index="5">6</div>
-        <div class="grid-item" data-index="6">7</div>
-        <div class="grid-item" data-index="7">8</div>
-        <div class="grid-item" data-index="8">9</div>
-        <div class="grid-item" data-index="9">10</div>
-        <div class="grid-item" data-index="10">11</div>
-        <div class="grid-item" data-index="11">12</div>
-        <div class="grid-item" data-index="12">13</div>
-        <div class="grid-item" data-index="13">14</div>
-        <div class="grid-item" data-index="14">15</div>
     </div>
 
     <script>
@@ -91,48 +81,86 @@
         const scrollThreshold = 100; // Minimum distance to count as a scroll
         const valueDisplay = document.getElementById("value");
         const overlay = document.querySelector(".event-overlay");
-        const gridItems = document.querySelectorAll(".grid-item");
-        let vibrationTimeout;
+        const gridContainer = document.getElementById("grid-container");
 
-        // Update the displayed value
-        function updateValueDisplay() {
-            valueDisplay.textContent = value;
-        }
+        // Hashmaps for layouts
+        const layouts = {
+            layout1: {
+                onScroll: (deltaY, layoutName) => {
+                    value -= deltaY; // Invert the effect of scrolling
+                    updateValueDisplay();
+                },
+                0: { icon: "1", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                1: { icon: "2", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                2: { icon: "3", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                3: { icon: "4", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                4: { icon: "5", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                5: { icon: "6", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                6: { icon: "7", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                7: { icon: "8", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                8: { icon: "9", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                9: { icon: "10", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                10: { icon: "11", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                11: { icon: "12", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                12: { icon: "13", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                13: { icon: "14", onClick: (gridBox, layoutName) => toggleColor(gridBox) },
+                14: { icon: "15", onClick: (gridBox, layoutName) => toggleColor(gridBox) }
+            }
+        };
 
-        // Handle swipe by adjusting value
-        function handleSwipe(deltaY) {
-            value -= deltaY; // Invert the effect of scrolling
-            updateValueDisplay();
-            provideHapticFeedback(); // Provide feedback during scrolling
-        }
+        // Function to initialize grid based on layout
+        function initializeGrid(layout) {
+            gridContainer.innerHTML = ''; // Clear existing grid items
+            Object.keys(layout).forEach(index => {
+                if (index !== 'onScroll') { // Skip the onScroll key
+                    const gridItem = document.createElement("div");
+                    gridItem.className = "grid-item";
+                    gridItem.dataset.index = index;
 
-        // Handle click by toggling grid item color
-        function handleClick(x, y) {
-            gridItems.forEach(item => {
-                const rect = item.getBoundingClientRect();
-                if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-                    // Toggle color between red and original
-                    if (item.style.backgroundColor === 'red') {
-                        item.style.backgroundColor = '#f0f0f0';
-                    } else {
-                        item.style.backgroundColor = 'red';
-                    }
+                    const button = document.createElement("div");
+                    button.className = "icon";
+                    button.textContent = layout[index].icon;
+                    button.onclick = () => layout[index].onClick(gridItem, 'layout1');
+
+                    gridItem.appendChild(button);
+                    gridContainer.appendChild(gridItem);
                 }
             });
         }
 
-        // Provide haptic feedback
-        function provideHapticFeedback() {
-            if (navigator.vibrate) {
-                navigator.vibrate([50, 50, 50]); // Vibration pattern: 50ms on, 50ms off, 50ms on
-                if (vibrationTimeout) {
-                    clearTimeout(vibrationTimeout);
-                }
-                vibrationTimeout = setTimeout(() => {
-                    if (navigator.vibrate) {
-                        navigator.vibrate(0); // Stop vibration when scrolling stops
+        // Function to update the displayed value
+        function updateValueDisplay() {
+            valueDisplay.textContent = value;
+        }
+
+        // Function to toggle color of the grid box
+        function toggleColor(gridBox) {
+            gridBox.style.backgroundColor = gridBox.style.backgroundColor === 'red' ? '#f0f0f0' : 'red';
+        }
+
+        // Handle swipe by adjusting value
+        function handleSwipe(deltaY) {
+            const layout = 'layout1'; // Example layout
+            if (layouts[layout] && layouts[layout].onScroll) {
+                layouts[layout].onScroll(deltaY, layout);
+            }
+        }
+
+        // Handle click by invoking button's onClick function
+        function handleClick(x, y) {
+            const layout = 'layout1'; // Example layout
+            if (layouts[layout]) {
+                const gridItems = document.querySelectorAll(".grid-item");
+                gridItems.forEach(item => {
+                    const rect = item.getBoundingClientRect();
+                    if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                        // Call the onClick function for the button
+                        const index = item.dataset.index;
+                        if (layouts[layout][index] && typeof layouts[layout][index].onClick === 'function') {
+                            layouts[layout][index].onClick(item, layout);
+                        }
                     }
-                }, 100); // Adjust the delay as needed
+                });
             }
         }
 
@@ -163,10 +191,6 @@
             if (!isSwiping) { // If not swiping, it's a tap/click
                 const touch = e.changedTouches[0];
                 handleClick(touch.clientX, touch.clientY);
-            } else {
-                if (navigator.vibrate) {
-                    navigator.vibrate(0); // Stop vibration on swipe end
-                }
             }
         }, false);
 
@@ -174,6 +198,9 @@
         document.body.addEventListener('touchmove', function(e) {
             e.preventDefault();
         }, { passive: false });
+
+        // Initialize the grid with the first layout
+        initializeGrid(layouts.layout1);
 
         updateValueDisplay();
     </script>
