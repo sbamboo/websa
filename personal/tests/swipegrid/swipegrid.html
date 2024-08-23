@@ -17,28 +17,16 @@
             overflow: hidden; /* Prevent scrolling on desktop browsers */
         }
 
-        .header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            width: 100%; /* Full width of the viewport */
-            justify-content: center; /* Center items horizontally */
-            gap: 20px; /* Space between value display and slider */
-        }
-
         .value-display {
+            margin-bottom: 20px; /* Space between value display and grid */
             font-size: 24px;
-        }
-
-        .slider {
-            width: 300px; /* Shorter slider width */
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(3, 80px); /* Smaller grid boxes */
-            grid-template-rows: repeat(5, 80px); /* Smaller grid boxes */
-            gap: 10px; /* Maintain the same distance between grid items */
+            grid-template-columns: repeat(3, 90px); /* Slightly smaller grid boxes */
+            grid-template-rows: repeat(5, 90px); /* Slightly smaller grid boxes */
+            gap: 10px;
             position: relative;
         }
 
@@ -49,8 +37,8 @@
             background-color: #f0f0f0;
             border: 1px solid #ddd;
             font-size: 20px;
-            width: 80px; /* Adjust size */
-            height: 80px; /* Adjust size */
+            width: 90px; /* Adjust size */
+            height: 90px; /* Adjust size */
         }
 
         .event-overlay {
@@ -65,10 +53,7 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="value-display">Value: <span id="value">0</span></div>
-        <input type="range" class="slider" min="0" max="500" value="0">
-    </div>
+    <div class="value-display">Value: <span id="value">0</span></div> <!-- Moved to the top -->
     <div class="grid-container">
         <div class="event-overlay"></div> <!-- Invisible overlay for event handling -->
         <div class="grid-item" data-index="0">1</div>
@@ -93,14 +78,12 @@
         let value = 0;
         const scrollThreshold = 100; // Minimum distance to count as a scroll
         const valueDisplay = document.getElementById("value");
-        const slider = document.querySelector(".slider");
         const overlay = document.querySelector(".event-overlay");
         const gridItems = document.querySelectorAll(".grid-item");
 
         // Update the displayed value
         function updateValueDisplay() {
             valueDisplay.textContent = value;
-            slider.value = value; // Sync slider with the value
         }
 
         // Handle swipe by adjusting value
