@@ -455,6 +455,7 @@
             generator(currentLayout,document.getElementById("grid-wrapper"));
             overlay = document.querySelector(".event-overlay");
             gridItems = document.querySelectorAll(".grid-item");
+            console.log("Reloaded ui!",overlay,gridItems)
         }
         reloadUi()
 
@@ -482,6 +483,7 @@
                     for (var [nid, data] of Object.entries(layouts[currentLayout]["gridboxes"])) {
                         if (data["elem"] == item) {
                             data["onClick"](item,nid,data["id"],currentLayout)
+                            console.log(`Called click for ${data["id"]}#${nid}`)
                             break
                         }
                     }
@@ -506,6 +508,7 @@
             // Check if user is swiping with a threshold
             if (Math.abs(deltaY) > parseInt(document.getElementById("threshold-input").value)) {
                 handleSwipe(deltaY);
+                console.log(`Called swipe for ${currentLayout}`)
                 startY = currentY; // Reset startY to allow continuous swipe detection
                 isSwiping = true;
             }
