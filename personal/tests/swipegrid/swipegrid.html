@@ -92,6 +92,7 @@
         const valueDisplay = document.getElementById("value");
         const overlay = document.querySelector(".event-overlay");
         const gridItems = document.querySelectorAll(".grid-item");
+        let vibrationTimeout;
 
         // Update the displayed value
         function updateValueDisplay() {
@@ -102,6 +103,7 @@
         function handleSwipe(deltaY) {
             value -= deltaY; // Invert the effect of scrolling
             updateValueDisplay();
+            provideHapticFeedback(); // Provide feedback during scrolling
         }
 
         // Handle click by toggling grid item color
@@ -117,6 +119,21 @@
                     }
                 }
             });
+        }
+
+        // Provide haptic feedback
+        function provideHapticFeedback() {
+            if (navigator.vibrate) {
+                navigator.vibrate([50, 50, 50]); // Vibration pattern: 50ms on, 50ms off, 50ms on
+                if (vibrationTimeout) {
+                    clearTimeout(vibrationTimeout);
+                }
+                vibrationTimeout = setTimeout(() => {
+                    if (navigator.vibrate) {
+                        navigator.vibrate(0); // Stop vibration when scrolling stops
+                    }
+                }, 100); // Adjust the delay as needed
+            }
         }
 
         let startY = 0;
@@ -146,6 +163,10 @@
             if (!isSwiping) { // If not swiping, it's a tap/click
                 const touch = e.changedTouches[0];
                 handleClick(touch.clientX, touch.clientY);
+            } else {
+                if (navigator.vibrate) {
+                    navigator.vibrate(0); // Stop vibration on swipe end
+                }
             }
         }, false);
 
