@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
     <title>Swipe and Click Demo</title>
     <style>
         body {
@@ -55,7 +55,7 @@
         }
 
         .text-input {
-            width: 4em; /* Four characters wide */
+            width: 2em; /* Four characters wide */
             text-align: center;
             font-size: 20px; /* Adjust font size for better visibility */
         }
@@ -64,7 +64,8 @@
 <body>
     <div class="value-container">
         <div class="value-display">Value: <span id="value">100</span></div>
-        <input id="threshold-input" type="text" class="text-input" value="0"> <!-- Editable text input -->
+        <input id="threshold-input" type="text" class="text-input" value="100">
+        <input id="scroll-divider-input" type="text" class="text-input" value="4">
     </div>
     <div class="grid-container" id="grid-wrapper"></div>
 
