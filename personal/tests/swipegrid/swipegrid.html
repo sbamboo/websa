@@ -442,7 +442,7 @@
             // Extract and return the first child of the container
             return container.firstChild;
         }
-        function toggleBackground(elem,bg="red",delay=500) {
+        function toggleBackground(elem,bg="red",delay=250) {
             // Save the current background color
             const originalColor = elem.style.backgroundColor;
             
@@ -488,7 +488,7 @@
                 }
                 if (layouts[layout]["gridboxes"][nid]["onClick"] == null) {
                     layouts[layout]["gridboxes"][nid]["onClick"] = (elem,nid,id,layout)=>{
-                        toggleBackground(elem,"red",500)
+                        toggleBackground(elem,"red",250)
                     }
                 }
                 div = document.createElement("div")
