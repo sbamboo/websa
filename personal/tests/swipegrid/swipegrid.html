@@ -14,6 +14,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            overflow: hidden; /* Prevent scrolling on desktop browsers */
         }
 
         .grid-container {
@@ -111,6 +112,11 @@
         });
 
         updateValueDisplay();
+
+        // Prevent default touchmove behavior to disable scrolling
+        document.body.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
     </script>
 </body>
 </html>
