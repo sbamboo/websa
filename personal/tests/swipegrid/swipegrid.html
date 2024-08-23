@@ -442,6 +442,18 @@
             // Extract and return the first child of the container
             return container.firstChild;
         }
+        function toggleBackground(elem,bg="red",delay=500) {
+            // Save the current background color
+            const originalColor = elem.style.backgroundColor;
+            
+            // Change the background color to red
+            elem.style.backgroundColor = bg;
+
+            // Set a timeout to change it back to the original color after 1 second (1000 milliseconds)
+            setTimeout(() => {
+                elem.style.backgroundColor = originalColor;
+            }, delay);
+        }
         function generator(layout,parent) {
             parent.innerHTML = `<div class="event-overlay"></div>`;
             for (var [nid, data] of Object.entries(layouts[layout]["gridboxes"])) {
@@ -476,11 +488,7 @@
                 }
                 if (layouts[layout]["gridboxes"][nid]["onClick"] == null) {
                     layouts[layout]["gridboxes"][nid]["onClick"] = (elem,nid,id,layout)=>{
-                        if (elem.style.backgroundColor === 'red') {
-                            elem.style.backgroundColor = '#f0f0f0';
-                        } else {
-                            elem.style.backgroundColor = 'red';
-                        }
+                        toggleBackground(elem,"red",500)
                     }
                 }
                 div = document.createElement("div")
