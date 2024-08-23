@@ -87,6 +87,122 @@
 
     <script>
         var layouts = {
+            "off": {
+                "onScroll": (distance,layout)=>{
+                    value += distance;
+                    updateValueDisplay();
+                },
+                "gridbox_template": "%",
+                "gridboxes": {
+                    0: {
+                        "id": "power",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{
+                            currentLayout="home"
+                        },
+                        "elem": null,
+                        "style-class": "grid-button-power-off"
+                    },
+                    1: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    2: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    3: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    4: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    5: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    6: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    7: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    8: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    9: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    10: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    11: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    12: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    13: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                    14: {
+                        "id": "empty",
+                        "icon": null,
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-empty"
+                    },
+                }
+            },
             "home": {
                 "onScroll": (distance,layout)=>{
                     value += distance;
@@ -97,92 +213,109 @@
                     0: {
                         "id": "power",
                         "icon": null,
-                        "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "onClick": (elem,nid,id,layout)=>{
+                            currentLayout="off"
+                        },
+                        "elem": null,
+                        "style-class": "grid-button-power"
                     },
                     1: {
-                        "id": "colour",
+                        "id": "color",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-color"
                     },
                     2: {
                         "id": "input",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-input"
                     },
                     3: {
                         "id": "num_1",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-num"
                     },
                     4: {
                         "id": "num_2",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-num"
                     },
                     5: {
                         "id": "num_3",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-num"
                     },
                     6: {
                         "id": "num_4",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-num"
                     },
                     7: {
                         "id": "num_5",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-num"
                     },
                     8: {
                         "id": "num_6",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-num"
                     },
                     9: {
                         "id": "num_7",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-num"
                     },
                     10: {
                         "id": "num_8",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-num"
                     },
                     11: {
                         "id": "num_9",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-num"
                     },
                     12: {
                         "id": "volume",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-volume"
                     },
                     13: {
                         "id": "num_0",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-num"
                     },
                     14: {
                         "id": "contrast",
                         "icon": null,
                         "onClick": (elem,nid,id,layout)=>{},
-                        "elem": null
+                        "elem": null,
+                        "style-class": "grid-button-contrast"
                     }
                 }
             }
