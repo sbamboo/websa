@@ -71,10 +71,7 @@
     <script>
         var layouts = {
             "off": {
-                "onScroll": (distance,layout)=>{
-                    value += distance;
-                    updateValueDisplay();
-                },
+                "onScroll": (distance,layout)=>{},
                 "gridbox_template": "%",
                 "gridboxes": {
                     0: {
@@ -104,10 +101,7 @@
                 }
             },
             "home": {
-                "onScroll": (distance,layout)=>{
-                    value += distance;
-                    updateValueDisplay();
-                },
+                "onScroll": (distance,layout)=>{},
                 "gridbox_template": "%",
                 "gridboxes": {
                     0: {
@@ -121,11 +115,14 @@
                         "style-class": "grid-button-power"
                     },
                     1: {
-                        "id": "color",
-                        "icon": "Färg",
-                        "onClick": null,
+                        "id": "volume",
+                        "icon": "Volym",
+                        "onClick": (elem,nid,id,layout)=>{
+                            currentLayout="volume"
+                            reloadUi()
+                        },
                         "elem": null,
-                        "style-class": "grid-button-color"
+                        "style-class": "grid-button-volume"
                     },
                     2: {
                         "id": "input",
@@ -136,80 +133,80 @@
                     },
                     3: {
                         "id": "num_1",
-                        "icon": null,
+                        "icon": "1",
                         "onClick": null,
                         "elem": null,
                         "style-class": "grid-button-num"
                     },
                     4: {
                         "id": "num_2",
-                        "icon": null,
+                        "icon": "2",
                         "onClick": null,
                         "elem": null,
                         "style-class": "grid-button-num"
                     },
                     5: {
                         "id": "num_3",
-                        "icon": null,
+                        "icon": "3",
                         "onClick": null,
                         "elem": null,
                         "style-class": "grid-button-num"
                     },
                     6: {
                         "id": "num_4",
-                        "icon": null,
+                        "icon": "4",
                         "onClick": null,
                         "elem": null,
                         "style-class": "grid-button-num"
                     },
                     7: {
                         "id": "num_5",
-                        "icon": null,
+                        "icon": "5",
                         "onClick": null,
                         "elem": null,
                         "style-class": "grid-button-num"
                     },
                     8: {
                         "id": "num_6",
-                        "icon": null,
+                        "icon": "6",
                         "onClick": null,
                         "elem": null,
                         "style-class": "grid-button-num"
                     },
                     9: {
                         "id": "num_7",
-                        "icon": null,
+                        "icon": "7",
                         "onClick": null,
                         "elem": null,
                         "style-class": "grid-button-num"
                     },
                     10: {
                         "id": "num_8",
-                        "icon": null,
+                        "icon": "8",
                         "onClick": null,
                         "elem": null,
                         "style-class": "grid-button-num"
                     },
                     11: {
                         "id": "num_9",
-                        "icon": null,
+                        "icon": "9",
                         "onClick": null,
                         "elem": null,
                         "style-class": "grid-button-num"
                     },
                     12: {
-                        "id": "volume",
-                        "icon": "Volym",
+                        "id": "color",
+                        "icon": "Färg",
                         "onClick": (elem,nid,id,layout)=>{
-                            currentLayout="volume"
+                            currentLayout="color"
                             reloadUi()
                         },
                         "elem": null,
-                        "style-class": "grid-button-volume"
+                        "style-class": "grid-button-color"
                     },
                     13: {
                         "id": "num_0",
-                        "icon": null,
+                        "icon": "0",
                         "onClick": null,
                         "elem": null,
                         "style-class": "grid-button-num"
@@ -217,7 +214,10 @@
                     14: {
                         "id": "contrast",
                         "icon": "Kontrast",
-                        "onClick": null,
+                        "onClick": (elem,nid,id,layout)=>{
+                            currentLayout="contrast"
+                            reloadUi()
+                        },
                         "elem": null,
                         "style-class": "grid-button-contrast"
                     }
@@ -225,13 +225,16 @@
             },
             "volume": {
                 "onScroll": (distance,layout)=>{
-                    value += distance;
+                    value += Math.round(distance/4);
+                    if (value > 100) {value = 100}
+                    if (value < 0) {value = 0}
+
                     updateValueDisplay();
                 },
                 "gridbox_template": "%",
                 "gridboxes": {
                     0: {
-                        "id": "power",
+                        "id": "back",
                         "icon": "Tillbaka",
                         "onClick": (elem,nid,id,layout)=>{
                             currentLayout="home"
@@ -243,13 +246,139 @@
                     1: {},
                     2: {},
                     3: {},
-                    4: {},
+                    4: {
+                        "id": "vol-ui-top",
+                        "icon": "T",
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-vol-ui-top"
+                    },
                     5: {},
                     6: {},
-                    7: {},
+                    7: {
+                        "id": "vol-ui-mid",
+                        "icon": "|",
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-vol-ui-mid"
+                    },
                     8: {},
                     9: {},
-                    10: {},
+                    10: {
+                        "id": "vol-ui-bot",
+                        "icon": "⊥",
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-vol-ui-bot"
+                    },
+                    11: {},
+                    12: {},
+                    13: {},
+                    14: {}
+                }
+            },
+            "color": {
+                "onScroll": (distance,layout)=>{
+                    value += Math.round(distance/4);
+                    if (value > 100) {value = 100}
+                    if (value < 0) {value = 0}
+
+                    updateValueDisplay();
+                },
+                "gridbox_template": "%",
+                "gridboxes": {
+                    0: {
+                        "id": "back",
+                        "icon": "Tillbaka",
+                        "onClick": (elem,nid,id,layout)=>{
+                            currentLayout="home"
+                            reloadUi()
+                        },
+                        "elem": null,
+                        "style-class": "grid-button-back"
+                    },
+                    1: {},
+                    2: {},
+                    3: {},
+                    4: {
+                        "id": "vol-ui-top",
+                        "icon": "T",
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-vol-ui-top"
+                    },
+                    5: {},
+                    6: {},
+                    7: {
+                        "id": "vol-ui-mid",
+                        "icon": "|",
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-vol-ui-mid"
+                    },
+                    8: {},
+                    9: {},
+                    10: {
+                        "id": "vol-ui-bot",
+                        "icon": "⊥",
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-vol-ui-bot"
+                    },
+                    11: {},
+                    12: {},
+                    13: {},
+                    14: {}
+                }
+            },
+            "contrast": {
+                "onScroll": (distance,layout)=>{
+                    value += Math.round(distance/4);
+                    if (value > 100) {value = 100}
+                    if (value < 0) {value = 0}
+
+                    updateValueDisplay();
+                },
+                "gridbox_template": "%",
+                "gridboxes": {
+                    0: {
+                        "id": "back",
+                        "icon": "Tillbaka",
+                        "onClick": (elem,nid,id,layout)=>{
+                            currentLayout="home"
+                            reloadUi()
+                        },
+                        "elem": null,
+                        "style-class": "grid-button-back"
+                    },
+                    1: {},
+                    2: {},
+                    3: {},
+                    4: {
+                        "id": "vol-ui-top",
+                        "icon": "T",
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-vol-ui-top"
+                    },
+                    5: {},
+                    6: {},
+                    7: {
+                        "id": "vol-ui-mid",
+                        "icon": "|",
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-vol-ui-mid"
+                    },
+                    8: {},
+                    9: {},
+                    10: {
+                        "id": "vol-ui-bot",
+                        "icon": "⊥",
+                        "onClick": (elem,nid,id,layout)=>{},
+                        "elem": null,
+                        "style-class": "grid-button-vol-ui-bot"
+                    },
                     11: {},
                     12: {},
                     13: {},
@@ -274,14 +403,32 @@
             parent.innerHTML = `<div class="event-overlay"></div>`;
             for (var [nid, data] of Object.entries(layouts[layout]["gridboxes"])) {
                 nid = parseInt(nid)
+                var bid = null
                 if (Object.keys(data).length < 1) {
                     layouts[layout]["gridboxes"][nid]["icon"] = ""
                     layouts[layout]["gridboxes"][nid]["style-class"] = "grid-button-empty"
                 } else {
-                    if (layouts[layout]["gridboxes"][nid]["icon"] == null) {
-                        layouts[layout]["gridboxes"][nid]["icon"] = layouts[layout]["gridbox_template"].replace("%",`<p>${nid+1}</p>`)
+                    if (layouts[layout]["gridboxes"][nid]["num"] != null) {
+                        if (bid == null) {
+                            bid = 1
+                        } else {
+                            bid += 1
+                        }
                     } else {
-                        layouts[layout]["gridboxes"][nid]["icon"] = layouts[layout]["gridboxes"][nid]["icon"].replace("%",`<p>${nid+1}</p>`)
+                        bid = null
+                    }
+                    if (layouts[layout]["gridboxes"][nid]["icon"] == null) {
+                        if (bid != null) {
+                            layouts[layout]["gridboxes"][nid]["icon"] = layouts[layout]["gridbox_template"].replace("%",`<p>${nid+1}</p>`)
+                        } else {
+                            layouts[layout]["gridboxes"][nid]["icon"] = layouts[layout]["gridbox_template"].replace("%",`<p>${bid+1}</p>`)
+                        }
+                    } else {
+                        if (bid != null) {
+                            layouts[layout]["gridboxes"][nid]["icon"] = layouts[layout]["gridboxes"][nid]["icon"].replace("%",`<p>${nid+1}</p>`)
+                        } else {
+                            layouts[layout]["gridboxes"][nid]["icon"] = layouts[layout]["gridboxes"][nid]["icon"].replace("%",`<p>${bid+1}</p>`)
+                        }
                     }
                 }
                 if (layouts[layout]["gridboxes"][nid]["onClick"] == null) {
@@ -306,15 +453,16 @@
         }
         function reloadUi() {
             generator(currentLayout,document.getElementById("grid-wrapper"));
+            overlay = document.querySelector(".event-overlay");
+            gridItems = document.querySelectorAll(".grid-item");
         }
         reloadUi()
 
         // Variables
         let value = 0;
-        const scrollThreshold = parseInt(document.getElementById("threshold-input").value); // Minimum distance to count as a scroll
         const valueDisplay = document.getElementById("value");
-        const overlay = document.querySelector(".event-overlay");
-        const gridItems = document.querySelectorAll(".grid-item");
+        var overlay = document.querySelector(".event-overlay");
+        var gridItems = document.querySelectorAll(".grid-item");
 
         // Update the displayed value
         function updateValueDisplay() {
@@ -356,7 +504,7 @@
             const deltaY = currentY - startY;
 
             // Check if user is swiping with a threshold
-            if (Math.abs(deltaY) > scrollThreshold) {
+            if (Math.abs(deltaY) > parseInt(document.getElementById("threshold-input").value)) {
                 handleSwipe(deltaY);
                 startY = currentY; // Reset startY to allow continuous swipe detection
                 isSwiping = true;
