@@ -200,7 +200,10 @@
                     12: {
                         "id": "volume",
                         "icon": "Volym",
-                        "onClick": null,
+                        "onClick": (elem,nid,id,layout)=>{
+                            currentLayout="volume"
+                            reloadUi()
+                        },
                         "elem": null,
                         "style-class": "grid-button-volume"
                     },
@@ -218,6 +221,39 @@
                         "elem": null,
                         "style-class": "grid-button-contrast"
                     }
+                }
+            },
+            "volume": {
+                "onScroll": (distance,layout)=>{
+                    value += distance;
+                    updateValueDisplay();
+                },
+                "gridbox_template": "%",
+                "gridboxes": {
+                    0: {
+                        "id": "power",
+                        "icon": "Tillbaka",
+                        "onClick": (elem,nid,id,layout)=>{
+                            currentLayout="home"
+                            reloadUi()
+                        },
+                        "elem": null,
+                        "style-class": "grid-button-back"
+                    },
+                    1: {},
+                    2: {},
+                    3: {},
+                    4: {},
+                    5: {},
+                    6: {},
+                    7: {},
+                    8: {},
+                    9: {},
+                    10: {},
+                    11: {},
+                    12: {},
+                    13: {},
+                    14: {}
                 }
             }
         }
