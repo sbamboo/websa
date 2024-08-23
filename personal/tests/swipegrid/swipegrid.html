@@ -207,7 +207,7 @@
                 layouts[layout]["gridboxes"][nid]["icon"] = htmlStringToElement(layouts[layout]["gridbox_template"].replace("%",`<p>${nid+1}</p>`))
                 layouts[layout]["gridboxes"][nid]["onClick"] = (elem,nid,id,layout)=>{
                     if (elem.style.backgroundColor === 'red') {
-                        elem.style.backgroundColor = 'red';
+                        elem.style.backgroundColor = '#f0f0f0';
                     } else {
                         elem.style.backgroundColor = 'red';
                     }
