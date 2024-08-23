@@ -17,10 +17,19 @@
             overflow: hidden; /* Prevent scrolling on desktop browsers */
         }
 
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 320px;
+            margin-bottom: 20px;
+        }
+
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-template-rows: repeat(5, 100px);
+            grid-template-columns: repeat(3, 90px); /* Adjusted for smaller grid items */
+            grid-template-rows: repeat(5, 90px); /* Adjusted for smaller grid items */
             gap: 10px;
             position: relative;
         }
@@ -32,20 +41,11 @@
             background-color: #f0f0f0;
             border: 1px solid #ddd;
             font-size: 20px;
-            transition: transform 0.3s; /* Smooth transition for resizing */
-        }
-
-        .grid-item:nth-child(2),
-        .grid-item:nth-child(5),
-        .grid-item:nth-child(8),
-        .grid-item:nth-child(11),
-        .grid-item:nth-child(14) {
-            transform: scale(0.9); /* Slightly smaller in the middle */
+            transform: scale(0.9); /* Slightly smaller for all items */
         }
 
         .value-display {
-            margin-top: 20px;
-            font-size: 24px;
+            font-size: 18px;
         }
 
         .event-overlay {
@@ -56,14 +56,27 @@
             height: 100%;
             background-color: transparent; /* Invisible overlay */
             z-index: 1; /* Ensure overlay is on top */
+            transform: scale(0.9); /* Match the grid scale */
         }
 
         .threshold-select {
-            margin-top: 20px;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
+    <!-- Controls on top of the grid -->
+    <div class="controls">
+        <div class="value-display">Value: <span id="value">0</span></div>
+        <div class="threshold-select">
+            Scroll Threshold:
+            <select id="scroll-threshold">
+                <!-- Options from 0 to 500 -->
+                ${Array.from({ length: 501 }, (_, i) => `<option value="${i}">${i}</option>`).join('')}
+            </select>
+        </div>
+    </div>
+
     <div class="grid-container">
         <div class="event-overlay"></div> <!-- Invisible overlay for event handling -->
         <div class="grid-item" data-index="0">1</div>
@@ -81,14 +94,6 @@
         <div class="grid-item" data-index="12">13</div>
         <div class="grid-item" data-index="13">14</div>
         <div class="grid-item" data-index="14">15</div>
-    </div>
-    <div class="value-display">Value: <span id="value">0</span></div>
-    <div class="threshold-select">
-        Scroll Threshold:
-        <select id="scroll-threshold">
-            <!-- Options from 0 to 500 -->
-            ${Array.from({ length: 51 }, (_, i) => `<option value="${i * 10}">${i * 10}</option>`).join('')}
-        </select>
     </div>
 
     <script>
