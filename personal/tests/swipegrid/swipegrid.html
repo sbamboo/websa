@@ -60,7 +60,6 @@
             width: 2em; /* Four characters wide */
             text-align: center;
             font-size: 20px; /* Adjust font size for better visibility */
-            display: hidden !important;
         }
 
         .gridbox-icon {
@@ -72,9 +71,9 @@
 </head>
 <body>
     <div class="value-container">
-        <div class="value-display">Value: <span id="value">20</span></div>
-        <input id="threshold-input" type="text" class="text-input" value="20">
-        <input id="scroll-divider-input" type="text" class="text-input" value="10">
+        <div class="value-display">Volume: <span id="value">20</span></div>
+        <!--<input id="threshold-input" type="text" class="text-input" value="20">
+        <input id="scroll-divider-input" type="text" class="text-input" value="10">-->
     </div>
     <div class="grid-container" id="grid-wrapper"></div>
 
@@ -260,7 +259,7 @@
             },
             "volume": {
                 "onScroll": (distance,layout)=>{
-                    value += Math.round(distance/parseInt(document.getElementById("scroll-divider-input").value));
+                    value += Math.round(distance/10);
                     if (value > 100) {value = 100}
                     if (value < 0) {value = 0}
 
@@ -523,7 +522,7 @@
                 const deltaY = currentY - startY;
 
                 // Check if user is swiping with a threshold
-                if (Math.abs(deltaY) > parseInt(document.getElementById("threshold-input").value)) {
+                if (Math.abs(deltaY) > 20) {
                     handleSwipe(deltaY);
                     console.log(`Called swipe for ${currentLayout}`)
                     startY = currentY; // Reset startY to allow continuous swipe detection
