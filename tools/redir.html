@@ -3,19 +3,21 @@
 <head>
   <title>Redirecting...</title>
   <script>
-    // Parse the URL parameters
-    const params = new URLSearchParams(window.location.search);
-    const url = params.get('url');
+    document.addEventListener("DOMContentLoaded", function() {
+      const params = new URLSearchParams(window.location.search);
+      const url = params.get('url');
 
-    if (url) {
-      // Redirect if 'url' param exists
-      window.location.href = url;
-    } else {
-      // Otherwise show a fallback message
-      document.addEventListener("DOMContentLoaded", function() {
+      if (url) {
+        // Open the target URL in a new window/tab
+        window.open(url, '_blank');
+        
+        // Optional: Update this page to tell the user
+        document.body.innerHTML = "<p>Opening... <a href='" + url + "'>Click here if nothing happens.</a></p>";
+      } else {
+        // Error if no URL provided
         document.body.innerHTML = "<p>Error: No URL provided.</p>";
-      });
-    }
+      }
+    });
   </script>
 </head>
 <body>
