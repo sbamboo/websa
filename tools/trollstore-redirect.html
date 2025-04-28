@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting...</title>
+  <script>
+    // Parse the URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get('url');
+
+    if (url) {
+      // Redirect if 'url' param exists
+      window.location.href = url;
+    } else {
+      // Otherwise show a fallback message
+      document.addEventListener("DOMContentLoaded", function() {
+        document.body.innerHTML = "<p>Error: No URL provided.</p>";
+      });
+    }
+  </script>
+</head>
+<body>
+  <noscript>
+    <p>JavaScript is required for redirect.</p>
+  </noscript>
+</body>
+</html>
